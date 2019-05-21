@@ -1,0 +1,30 @@
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+/* Base */
+@import "site-base";
+/* Navbar */
+@import "site-navbar";
+/* Blocks */
+@import "site-blocks";
+
+
+button.tag {
+    background-color: #364e68;
+    color: white;
+}
+button.tag:hover {
+    background-color: rgb(186, 186, 186);
+    color: white;
+}
+
+ button.activeFilter {
+     background-color: #7cbd1e !important;
+ }
+
+ #select-date.invalid::after {
+    content: "Invalid date";
+    font-size: 0.9rem;
+    color: red;
+ }
