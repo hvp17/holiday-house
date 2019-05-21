@@ -83,7 +83,7 @@
                       </li>
                     </ul>
                   </li>
-                          <li><a href="about.php">About</a></li>
+                         
                           <li><a href="signup.php">Signup</a></li>
                           <li><a href="login.php">Login</a></li>
                 </ul>
