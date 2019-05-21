@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const path = require("path");
 const { Storage } = require("@google-cloud/storage");
 
 const storage = new Storage({
@@ -23,15 +23,18 @@ var myBucket = storage.bucket(BUCKET_NAME);
 //   // file saved
 // });
 
-// // get public url for file
-// var getPublicThumbnailUrlForItem = file_name => {
-//   return `https://storage.googleapis.com/${BUCKET_NAME}/${file_name}`;
-// };
+// get public url for file
+var getPublicThumbnailUrlForItem = file_name => {
+  return `https://storage.googleapis.com/${BUCKET_NAME}/${file_name}`;
+};
 
 const connection = require("../../connection");
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   try {
+    console.log(myBucket);
+    const [files] = await storage.bucket(BUCKET_NAME).getFiles();
+    console.log(files);
     connection.query("SELECT * FROM users", (err, rows) => {
       if (err) throw err;
       res.send(rows);
@@ -42,25 +45,45 @@ router.get("/", (req, res) => {
   }
 });
 
-router.post("/upload", (req, res) => {
+router.get("/1", async (req, res) => {
+  const options = {
+    version: "v4", // defaults to 'v2' if missing.
+    action: "read",
+    expires: Date.now() + 1000 * 60 * 60 // one hour
+  };
+
+  // Get a v2 signed URL for the file
+  const [url] = await storage
+    .bucket(BUCKET_NAME)
+    .file("puppy.jpeg")
+    .getSignedUrl(options);
+
+  res.send(url);
+});
+
+router.get("/upload", (req, res) => {
   try {
-    const { name, email, phone, password } = req.body;
-    const hashedPassword = bcrypt.hashSync(password, 10);
-    connection.execute(
-      "INSERT INTO `users` (`name`, `email`, `phone`, `password`) VALUES (?, ?, ?, ?);",
-      [name, email, phone, hashedPassword],
-      (err, response) => {
-        if (err || response.affectedRows < 1)
-          res.send({
-            ok: false,
-            msg: `Failed to register. ${err.message && err.message}`
-          });
-        const token = jwt.sign(user.email, process.env.SECRET);
-        res.send({ ok: true, token });
-        if (err) throw err;
-        res.send(rows);
-      }
-    );
+    // let localFileLocation = "./public/images/zebra.gif";
+    // myBucket.uploadAsync("../../../puppy.jpeg", { public: true }).then(file => {
+    //   console.log("saved");
+    // });
+    storage
+      .bucket(BUCKET_NAME)
+      .upload(path.join(__dirname, "puppy.jpeg"), {
+        // Support for HTTP requests made with `Accept-Encoding: gzip`
+        gzip: true,
+        public: true,
+        // By setting the option `destination`, you can change the name of the
+        // object you are uploading to a bucket.
+        metadata: {
+          // Enable long-lived HTTP caching headers
+          // Use only if the contents of the file will never change
+          // (If the contents will change, use cacheControl: 'no-cache')
+          cacheControl: "public, max-age=31536000"
+        }
+      })
+      .then(() => res.send("success"))
+      .catch(err => console.log(err));
   } catch (error) {
     console.log(error);
     res.send(error);
