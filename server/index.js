@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 const port = 3000;
 
 app.use(cors());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/user", userRoutes);
 app.use("/images", imagesRoutes);
