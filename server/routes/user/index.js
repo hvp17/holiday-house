@@ -20,17 +20,22 @@ router.get("/", (req, res) => {
 router.post("/register", (req, res) => {
   try {
     const { name, email, phone, password } = req.body;
-    const hashedPassword = bcrypt.hashSync(password, 10);
+    console.log("values: ", req.body);
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(password, salt);
     connection.execute(
       "INSERT INTO `users` (`name`, `email`, `phone`, `password`) VALUES (?, ?, ?, ?);",
       [name, email, phone, hashedPassword],
       (err, response) => {
+        console.log(response);
         if (err || response.affectedRows < 1)
           res.send({
             ok: false,
             msg: `Failed to register. ${err.message && err.message}`
           });
-        const token = jwt.sign(user.email, process.env.SECRET);
+        const token = jwt.sign(email, process.env.SECRET);
+        console.log("secret: ", process.env.SECRET);
+        console.log(token);
         res.send({ ok: true, token });
         if (err) throw err;
       }
