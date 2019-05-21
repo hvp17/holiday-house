@@ -33,7 +33,6 @@ router.post("/register", (req, res) => {
         const token = jwt.sign(user.email, process.env.SECRET);
         res.send({ ok: true, token });
         if (err) throw err;
-        res.send(rows);
       }
     );
   } catch (error) {
