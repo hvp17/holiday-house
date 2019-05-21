@@ -33,9 +33,6 @@ const connection = require("../../connection");
 router.get("/getHouseImages", async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(myBucket);
-    const [files] = await storage.bucket(BUCKET_NAME).getFiles();
-    console.log(files);
     connection.query(
       "SELECT * FROM images WHERE house_id = ?",
       [id],
