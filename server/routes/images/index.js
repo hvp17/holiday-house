@@ -3,6 +3,31 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const { Storage } = require("@google-cloud/storage");
+
+const storage = new Storage({
+  projectId: "api-project-567469925348",
+  keyFilename: "key.json"
+});
+
+var BUCKET_NAME = "holiday-house";
+// https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/0.39.0/storage/bucket
+var myBucket = storage.bucket(BUCKET_NAME);
+// check if a file exists in bucket
+// https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/0.39.0/storage/file?method=exists
+
+// // upload file to bucket
+// // https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/0.39.0/storage/bucket?method=upload
+// let localFileLocation = "./public/images/zebra.gif";
+// myBucket.uploadAsync(localFileLocation, { public: true }).then(file => {
+//   // file saved
+// });
+
+// // get public url for file
+// var getPublicThumbnailUrlForItem = file_name => {
+//   return `https://storage.googleapis.com/${BUCKET_NAME}/${file_name}`;
+// };
+
 const connection = require("../../connection");
 
 router.get("/", (req, res) => {
@@ -17,7 +42,7 @@ router.get("/", (req, res) => {
   }
 });
 
-router.post("/register", (req, res) => {
+router.post("/upload", (req, res) => {
   try {
     const { name, email, phone, password } = req.body;
     const hashedPassword = bcrypt.hashSync(password, 10);
