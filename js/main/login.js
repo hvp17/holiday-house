@@ -7,6 +7,7 @@ $(document).on('click', '#btnLogin', function () {
     }).always(function (jData) {
         console.log("jData ", jData);
         if(jData.status===1){
+            window.localStorage.setItem('token', jData.token) 
             window.location.href = "/";
         }else{
             console.log('error login')

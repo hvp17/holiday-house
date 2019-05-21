@@ -8,7 +8,8 @@ $(document).on("click", 'a[href="#finish"]', function() {
   }).always(function(jData) {
     console.log("jData ", jData);
     if(jData.status===1){
-        window.location.href = "/login";
+        window.localStorage.setItem('token', jData.token) 
+        window.location.href = "/";
     }else{
         console.log('error signup')
     }
