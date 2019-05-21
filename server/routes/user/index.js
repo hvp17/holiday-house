@@ -27,16 +27,18 @@ router.post("/register", (req, res) => {
       "INSERT INTO `users` (`name`, `email`, `phone`, `password`) VALUES (?, ?, ?, ?);",
       [name, email, phone, hashedPassword],
       (err, response) => {
-        console.log(response);
         if (err || response.affectedRows < 1)
           res.send({
-            ok: false,
-            msg: `Failed to register. ${err.message && err.message}`
+            status: 1,
+            message: `Failed to register. ${err.message && err.message}`
           });
-        const token = jwt.sign(email, process.env.SECRET);
-        console.log("secret: ", process.env.SECRET);
+        const token = jwt.sign(
+          { email, id: response.insertId },
+          process.env.SECRET
+        );
+
         console.log(token);
-        res.send({ ok: true, token });
+        res.send({ status: 1, token });
         if (err) throw err;
       }
     );
@@ -57,10 +59,13 @@ router.post("/login", (req, res) => {
         console.log(rows);
         const user = rows[0];
         if (bcrypt.compareSync(password, user.password)) {
-          const token = jwt.sign(user.email, process.env.SECRET);
-          res.send({ ok: true, token });
+          const token = jwt.sign(
+            { email: user.email, id: user.id },
+            process.env.SECRET
+          );
+          res.send({ status: 1, token });
         } else {
-          res.send({ ok: false, msg: "Invalid login credentials" });
+          res.send({ status: 0, message: "Invalid login credentials" });
         }
         if (err) throw err;
       }
