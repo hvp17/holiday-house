@@ -28,7 +28,7 @@ require_once __DIR__.'/component/top.php'?>
 								</div>
 
 							</div>
-                            <button id="btnLogin" class="">Login</button>
+                            <button id="btnLogin" type="button" class="">Login</button>
 
 						</div>
 					</div>
