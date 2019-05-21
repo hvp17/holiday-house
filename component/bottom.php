@@ -66,6 +66,26 @@
   </div>
 
   <script src="js/jquery-3.3.1.min.js"></script>
+  <script>
+      var token = window.localStorage.getItem('token')
+      if (token){
+        $('.loggedin1').append(`
+        <a href="list-house.php">List House</a>
+        `)
+        $('.loggedin2').append(`
+        <a href="account.php">Account</a>
+        `)
+      }else{
+
+        $('.loggedin1').append(`
+        <a href="signup.php">Signup</a>
+        `)
+        $('.loggedin2').append(`
+        <a href="login.php">Login</a>
+        `)
+      }
+  
+  </script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/jquery-ui.js"></script>
   <script src="js/popper.min.js"></script>
@@ -92,6 +112,7 @@ if (isset($sScript)) {
 if ($searchScript) {
   ?>
   <script src="js/main/search.js"></script>
+ 
   
 <?php } ?>
 
