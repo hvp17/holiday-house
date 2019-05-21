@@ -83,7 +83,6 @@
                       </li>
                     </ul>
                   </li>
-                          <li><a href="about.php">About</a></li>
                           <li class="loggedin1"></li>
                           <li class="loggedin2"></li>
                          
