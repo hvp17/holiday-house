@@ -163,8 +163,7 @@
 
  .inner {
      display: flex;
-     height: -webkit-fill-available;
-
+     padding-bottom: 50px;
      background: #fff;
      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
      -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
@@ -184,6 +183,7 @@
      padding-top: 65px;
      padding-left: 51px;
      padding-right: 51px;
+     padding-bottom: 40px;
      margin: 0 auto;
  }
 
