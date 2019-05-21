@@ -3,7 +3,7 @@ $(document).on('click', 'a[href="#finish"]', function () {
 var test = $('#wizard').serialize()
 console.log(test)
     $.ajax({
-        url: 'http://localhost:3000/api/user/register',
+        url: 'http://localhost:3000/user/register',
         data: $('#wizard').serialize(),
         method: 'POST',
         dataType: 'JSON'
