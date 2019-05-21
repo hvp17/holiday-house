@@ -1,8 +1,9 @@
 $(document).on('click', 'a[href="#finish"]', function () {
     console.log('click');
-
+var test = $('#wizard').serialize()
+console.log(test)
     $.ajax({
-        url: 'apis/api-signup.php',
+        url: 'http://localhost:3000/api/user/register',
         data: $('#wizard').serialize(),
         method: 'POST',
         dataType: 'JSON'
