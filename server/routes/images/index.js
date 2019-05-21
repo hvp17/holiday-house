@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt-nodejs");
 const jwt = require("jsonwebtoken");
 const path = require("path");
 const { Storage } = require("@google-cloud/storage");
