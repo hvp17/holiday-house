@@ -7,29 +7,29 @@ router.get("/", (req, res) => {
   try {
     connection.query("SELECT * FROM houses", (err, rows) => {
       if (err) throw err;
-      res.send({ ok: true, data: rows });
+      res.send({ status: 1, houses: rows });
     });
   } catch (error) {
     console.log(error);
-    res.send({ ok: false, msg: error.message });
+    res.send({ status: 0, message: error.message });
   }
 });
 
 router.get("/one/:id", (req, res) => {
   try {
     const { id } = req.params;
-    if (!id) res.send({ ok: false, msg: "No ID is provided" });
+    if (!id) res.send({ ok: 0, message: "No ID is provided" });
     connection.execute(
       "SELECT * FROM houses WHERE id = ?",
       [id],
       (err, rows) => {
         if (err) throw err;
-        res.send({ ok: true, data: rows });
+        res.send({ status: 1, house: rows });
       }
     );
   } catch (error) {
     console.log(error);
-    res.send({ ok: false, msg: error.msg });
+    res.send({ status: 0, message: error.msg });
   }
 });
 
