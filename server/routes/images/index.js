@@ -24,21 +24,26 @@ var myBucket = storage.bucket(BUCKET_NAME);
 // });
 
 // get public url for file
-var getPublicThumbnailUrlForItem = file_name => {
+var getPublicUrlForItem = file_name => {
   return `https://storage.googleapis.com/${BUCKET_NAME}/${file_name}`;
 };
 
 const connection = require("../../connection");
 
-router.get("/", async (req, res) => {
+router.get("/getHouseImages", async (req, res) => {
   try {
+    const { id } = req.params;
     console.log(myBucket);
     const [files] = await storage.bucket(BUCKET_NAME).getFiles();
     console.log(files);
-    connection.query("SELECT * FROM users", (err, rows) => {
-      if (err) throw err;
-      res.send(rows);
-    });
+    connection.query(
+      "SELECT * FROM images WHERE house_id = ?",
+      [id],
+      (err, rows) => {
+        if (err) throw err;
+        res.send(rows);
+      }
+    );
   } catch (error) {
     console.log(error);
     res.send(error);
@@ -69,7 +74,7 @@ router.get("/upload", (req, res) => {
     // });
     storage
       .bucket(BUCKET_NAME)
-      .upload(path.join(__dirname, "puppy.jpeg"), {
+      .upload(path.join(__dirname, "puppy1.jpeg"), {
         // Support for HTTP requests made with `Accept-Encoding: gzip`
         gzip: true,
         public: true,
@@ -82,7 +87,9 @@ router.get("/upload", (req, res) => {
           cacheControl: "public, max-age=31536000"
         }
       })
-      .then(() => res.send("success"))
+      .then(response =>
+        res.send(getPublicUrlForItem(response[0].metadata.name))
+      )
       .catch(err => console.log(err));
   } catch (error) {
     console.log(error);
