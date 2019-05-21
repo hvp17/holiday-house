@@ -1,12 +1,4 @@
 $(document).on("click", 'a[href="#finish"]', function() {
-  console.log("click");
-  const data = $("#wizard")
-    .serializeArray()
-    .reduce(function(m, o) {
-      m[o.name] = o.value;
-      return m;
-    }, {});
-  console.log(data);
   $.ajax({
     url: "http://localhost:3000/user/register",
     data: $("#wizard").serialize(),
@@ -15,6 +7,12 @@ $(document).on("click", 'a[href="#finish"]', function() {
     dataType: "JSON"
   }).always(function(jData) {
     console.log("jData ", jData);
+    if(jData.status===1){
+        window.localStorage.setItem('token', jData.token) 
+        window.location.href = "/";
+    }else{
+        console.log('error signup')
+    }
   });
 });
 
