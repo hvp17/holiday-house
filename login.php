@@ -17,7 +17,7 @@ require_once __DIR__.'/component/top.php'?>
 							<div class="form-header">
 								<h3>Login</h3>
 							</div>
-							<p>Please fill with your details</p>
+							<p>Please fill your details in</p>
 							<div class="form-row">
 							</div>
 							<div class="form-row">
