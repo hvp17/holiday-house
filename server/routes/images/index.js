@@ -30,15 +30,15 @@ var getPublicUrlForItem = file_name => {
 
 const connection = require("../../connection");
 
-router.get("/getHouseImages", async (req, res) => {
+router.get("/getHouseImages/:id", async (req, res) => {
   try {
     const { id } = req.params;
     connection.query(
-      "SELECT * FROM images WHERE house_id = ?",
+      "SELECT * FROM images WHERE house_fk = ?",
       [id],
       (err, rows) => {
         if (err) throw err;
-        res.send(rows);
+        res.send({ status: 1, images: rows });
       }
     );
   } catch (error) {
