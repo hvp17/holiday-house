@@ -46,11 +46,8 @@
           <div class="col-md-12">
             <div class="view-options bg-white py-3 px-3 d-md-flex align-items-center">
               <div class="mr-auto">
-                <span class="col-md-2"> <button type="button" class="btn tag" id="btnFamilty">Family Friendly </button>  </span>              
-                <span class="col-md-2"> <button type="button" class="btn tag" id="btnPool">Swimming Pool  </button> </span>                
-                <span class="col-md-2"> <button type="button" class="btn tag" id="btnWifi">Free WiFi  </button> </span>                
-                <span class="col-md-2"> <button type="button" class="btn tag" id="btnBeach">Short distance to a beach </button> </span>              
-                
+                <span class="col-md-2"> <button type="button" class="btn tag" id="btnFamilty">Family Friendly</button></span>
+                <span class="col-md-2"> <button type="button" class="btn tag" id="btnPool">Smoker Friendly</button></span>
               </div>
               <div class="ml-auto d-flex align-items-center">
                 <div class="select-wrap">
