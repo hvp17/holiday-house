@@ -1,20 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: May 27, 2019 at 08:00 AM
--- Server version: 5.7.25
--- PHP Version: 7.3.1
+-- Vært: localhost:3306
+-- Genereringstid: 27. 05 2019 kl. 11:50:21
+-- Serverversion: 5.7.23
+-- PHP-version: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `holiday-house`
@@ -23,7 +17,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `houses`
+-- Struktur-dump for tabellen `houses`
 --
 
 CREATE TABLE `houses` (
@@ -37,20 +31,24 @@ CREATE TABLE `houses` (
   `user_fk` bigint(20) UNSIGNED NOT NULL,
   `rooms` int(10) NOT NULL,
   `smoker_friendly` tinyint(1) NOT NULL,
-  `family_friendly` tinyint(1) NOT NULL
+  `family_friendly` tinyint(1) NOT NULL,
+  `price_per_night` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `houses`
+-- Data dump for tabellen `houses`
 --
 
-INSERT INTO `houses` (`id`, `title`, `description`, `address`, `type_fk`, `start_date`, `end_date`, `user_fk`, `rooms`, `smoker_friendly`, `family_friendly`) VALUES
-(1, 'Great title', 'great description', 'addres 2231ff', 1, '2019-05-14 14:54:37', '2019-05-14 22:00:00', 7, 3, 1, 0);
+INSERT INTO `houses` (`id`, `title`, `description`, `address`, `type_fk`, `start_date`, `end_date`, `user_fk`, `rooms`, `smoker_friendly`, `family_friendly`, `price_per_night`) VALUES
+(1, 'Great title1', 'great description1', 'addres 2231ff', 1, '2019-05-14 14:54:37', '2019-05-14 22:00:00', 7, 3, 1, 0, 800),
+(2, 'Great title2', 'great description2', 'addres 2231ff', 1, '2019-05-14 14:54:37', '2019-05-14 22:00:00', 7, 3, 1, 0, 2000),
+(3, 'Great title3', 'great description3', 'addres 2231ff', 1, '2019-05-14 14:54:37', '2019-05-14 22:00:00', 7, 3, 1, 0, 1300),
+(4, 'Great title4', 'great description4', 'addres 2231ff', 1, '2019-05-14 14:54:37', '2019-05-14 22:00:00', 7, 3, 1, 0, 4200);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `images`
+-- Struktur-dump for tabellen `images`
 --
 
 CREATE TABLE `images` (
@@ -62,7 +60,7 @@ CREATE TABLE `images` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `types`
+-- Struktur-dump for tabellen `types`
 --
 
 CREATE TABLE `types` (
@@ -71,7 +69,7 @@ CREATE TABLE `types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `types`
+-- Data dump for tabellen `types`
 --
 
 INSERT INTO `types` (`id`, `name`) VALUES
@@ -80,7 +78,7 @@ INSERT INTO `types` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur-dump for tabellen `users`
 --
 
 CREATE TABLE `users` (
@@ -92,18 +90,18 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Data dump for tabellen `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `password`) VALUES
 (7, 'TestingName1', 'TestingEmail1', '231234444', '$2b$10$rmLLAYsVaNJWNdxgPRX4G.ennXqmx0JiRWWZ6wjw2jiHAQHjhz0r2');
 
 --
--- Indexes for dumped tables
+-- Begrænsninger for dumpede tabeller
 --
 
 --
--- Indexes for table `houses`
+-- Indeks for tabel `houses`
 --
 ALTER TABLE `houses`
   ADD PRIMARY KEY (`id`),
@@ -112,7 +110,7 @@ ALTER TABLE `houses`
   ADD KEY `type_id` (`type_fk`);
 
 --
--- Indexes for table `images`
+-- Indeks for tabel `images`
 --
 ALTER TABLE `images`
   ADD PRIMARY KEY (`id`),
@@ -120,64 +118,60 @@ ALTER TABLE `images`
   ADD KEY `house_id` (`house_fk`);
 
 --
--- Indexes for table `types`
+-- Indeks for tabel `types`
 --
 ALTER TABLE `types`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Indexes for table `users`
+-- Indeks for tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Brug ikke AUTO_INCREMENT for slettede tabeller
 --
 
 --
--- AUTO_INCREMENT for table `houses`
+-- Tilføj AUTO_INCREMENT i tabel `houses`
 --
 ALTER TABLE `houses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `images`
+-- Tilføj AUTO_INCREMENT i tabel `images`
 --
 ALTER TABLE `images`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `types`
+-- Tilføj AUTO_INCREMENT i tabel `types`
 --
 ALTER TABLE `types`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `users`
+-- Tilføj AUTO_INCREMENT i tabel `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- Constraints for dumped tables
+-- Begrænsninger for dumpede tabeller
 --
 
 --
--- Constraints for table `houses`
+-- Begrænsninger for tabel `houses`
 --
 ALTER TABLE `houses`
   ADD CONSTRAINT `houses_ibfk_1` FOREIGN KEY (`user_fk`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `houses_ibfk_2` FOREIGN KEY (`type_fk`) REFERENCES `types` (`id`);
 
 --
--- Constraints for table `images`
+-- Begrænsninger for tabel `images`
 --
 ALTER TABLE `images`
   ADD CONSTRAINT `images_ibfk_1` FOREIGN KEY (`house_fk`) REFERENCES `houses` (`id`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
