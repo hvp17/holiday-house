@@ -66,9 +66,9 @@
                   <li>
                     <a href="properties.php">Properties</a>
                   </li>
-                          <li class="loggedin1"></li>
-                          <li class="loggedin2"></li>
-                          <li class="loggedin3"></li>
+                  <li class="loggedin1"></li>
+                  <li class="loggedin2"></li>
+                  <li class="loggedin3"></li>
                          
                           
                 </ul>
