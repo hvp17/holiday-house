@@ -53,7 +53,7 @@
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
                   <select class="form-control form-control-sm d-block rounded-0 select-price">
-                    <option value="">Sort by</option>
+                    <option value="">Sort by price</option>
                     <option value="l2h">Price Ascending</option>
                     <option value="h2l">Price Descending</option>
                   </select>
