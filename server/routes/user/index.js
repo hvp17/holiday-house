@@ -19,13 +19,13 @@ router.get("/", (req, res) => {
 
 router.post("/register", (req, res) => {
   try {
-    const { name, email, phone, password } = req.body;
+    const { txtName, txtEmail, txtPhone, txtPassword } = req.body;
     console.log("values: ", req.body);
     const salt = bcrypt.genSaltSync(10);
-    const hashedPassword = bcrypt.hashSync(password, salt);
+    const hashedPassword = bcrypt.hashSync(txtPassword, salt);
     connection.execute(
       "INSERT INTO `users` (`name`, `email`, `phone`, `password`) VALUES (?, ?, ?, ?);",
-      [name, email, phone, hashedPassword],
+      [txtName, txtEmail, txtPhone, hashedPassword],
       (err, response) => {
         if (err || response.affectedRows < 1)
           res.send({
@@ -33,7 +33,7 @@ router.post("/register", (req, res) => {
             message: `Failed to register. ${err.message && err.message}`
           });
         const token = jwt.sign(
-          { email, id: response.insertId },
+          { txtEmail, id: response.insertId },
           process.env.SECRET
         );
 
@@ -50,15 +50,15 @@ router.post("/register", (req, res) => {
 
 router.post("/login", (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { txtEmail, txtPassword } = req.body;
 
     connection.execute(
       "SELECT * FROM users WHERE email=?",
-      [email],
+      [txtEmail],
       (err, rows) => {
         console.log(rows);
         const user = rows[0];
-        if (bcrypt.compareSync(password, user.password)) {
+        if (bcrypt.compareSync(txtPassword, user.password)) {
           const token = jwt.sign(
             { email: user.email, id: user.id },
             process.env.SECRET

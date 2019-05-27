@@ -23,7 +23,7 @@ require_once __DIR__.'/component/top.php'?>
 							<p>Please fill with your details</p>
 							<div class="form-row">
 								<div class="form-holder">
-									<input type="text" placeholder="Name" class="form-control" name="name">
+									<input type="text" placeholder="Name" class="form-control" name="txtName">
 								</div>
 							</div>
 						
@@ -47,12 +47,12 @@ require_once __DIR__.'/component/top.php'?>
 							<p>Please fill with additional info</p>
 							<div class="form-row">
 								<div class="form-holder">
-									<input type="text" placeholder="Email" class="form-control" name="email">
+									<input type="text" placeholder="Email" class="form-control" name="txtEmail">
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-holder">
-									<input type="text" placeholder="Phone" class="form-control" name="phone">
+									<input type="text" placeholder="Phone" class="form-control" name="txtPhone">
 								</div>
 							</div>
 							
@@ -75,7 +75,7 @@ require_once __DIR__.'/component/top.php'?>
 						
 							<div class="form-row">
 								<div class="form-holder">
-									<input type="password" placeholder="Password" class="form-control" name="password">
+									<input type="password" placeholder="Password" class="form-control" name="txtPassword">
 								</div>
 							</div>
 						</div>

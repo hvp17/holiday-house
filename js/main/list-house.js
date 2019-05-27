@@ -6,7 +6,7 @@ $(document).on("click", 'a[href="#finish"]', function() {
   console.log("imageFiles ", imageFiles);
   $.ajax({
     url: "http://localhost:3000/houses/create",
-    data: { data: data, imageFiles: imageFiles },
+    data: { data: data },
     method: "POST",
     dataType: "JSON"
   }).always(function(jData) {

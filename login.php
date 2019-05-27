@@ -22,10 +22,10 @@ require_once __DIR__.'/component/top.php'?>
 							</div>
 							<div class="form-row">
 								<div class="form-holder">
-									<input type="text" placeholder="Your Email" class="form-control" name="email">
+									<input type="text" placeholder="Your Email" class="form-control" name="txtEmail">
 								</div>
 								<div class="form-holder">
-									<input type="password" placeholder="Password" class="form-control" name="password">
+									<input type="password" placeholder="Password" class="form-control" name="txtPassword">
 								</div>
 							</div>
 			
