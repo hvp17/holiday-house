@@ -46,16 +46,16 @@
           <div class="col-md-12">
             <div class="view-options bg-white py-3 px-3 d-md-flex align-items-center">
               <div class="mr-auto">
-                <span class="col-md-2"> <button type="button" class="btn tag" id="btnFamilty">Family Friendly</button></span>
-                <span class="col-md-2"> <button type="button" class="btn tag" id="btnPool">Smoker Friendly</button></span>
+                <span class="col-md-2"> <button type="button" class="btn tag" id="btnFamily">Family Friendly</button></span>
+                <span class="col-md-2"> <button type="button" class="btn tag" id="btnSmoker">Smoker Friendly</button></span>
               </div>
               <div class="ml-auto d-flex align-items-center">
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
-                  <select class="form-control form-control-sm d-block rounded-0">
+                  <select class="form-control form-control-sm d-block rounded-0 select-price">
                     <option value="">Sort by</option>
-                    <option value="">Price Ascending</option>
-                    <option value="">Price Descending</option>
+                    <option value="l2h">Price Ascending</option>
+                    <option value="h2l">Price Descending</option>
                   </select>
                 </div>
               </div>

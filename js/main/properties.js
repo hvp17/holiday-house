@@ -21,10 +21,9 @@ $(document).ready(function(){
     dataType: "JSON"
   }).always(function(jData) {
     let houses = jData.houses
-    console.log(houses)
     houses.forEach(house => {
       $('#housesContainer').append(`   
-        <div class="col-md-6 col-lg-4 mb-4">
+        <div class="col-md-6 col-lg-4 mb-4 item" data-price="${house.price_per_night}">
           <div class="property-entry h-100">
             <a href="property-details.php?id=${house.id}" class="property-thumbnail">
               <img src="images/img_1.jpg" alt="Image" class="img-fluid">
@@ -40,11 +39,11 @@ $(document).ready(function(){
                 </li>
                 <li>
                   <span class="property-specs">Family friendly</span>
-                  <span class="property-specs-number">${isFamilyFriendly(house)}</span>
+                  <span class="familyFriendly" data-family="${house.family_friendly}">${isFamilyFriendly(house)}</span>
                 </li>
                 <li>
                   <span class="property-specs">Smoker friendly</span>
-                  <span class="property-specs-number">${isSmokerFriendly(house)}</span>
+                  <span class="smokerFriendly" data-smoker="${house.smoker_friendly}">${isSmokerFriendly(house)}</span>
                 </li>
               </ul>
             </div>
@@ -52,5 +51,59 @@ $(document).ready(function(){
         </div>`);
     });
   });
+
+  let familyFriendlyFilter = document.getElementById('btnFamily')
+
+  familyFriendlyFilter.addEventListener('click', () => {
+    let smokerFriendlyElements = document.querySelectorAll('.smokerFriendly')
+    smokerFriendlyElements.forEach(smokerFriendlyElement => {
+      let value = smokerFriendlyElement.dataset.smoker
+      if (value == 0) {
+        let parent = smokerFriendlyElement.closest('.item')
+        console.log(parent);
+        $(parent).toggle();
+      }
+    });
+  })
+
+  let smokerFriendlyFilter = document.getElementById('btnSmoker')
+
+  smokerFriendlyFilter.addEventListener('click', () => {
+    let familyFriendlyElements = document.querySelectorAll('.familyFriendly')
+    familyFriendlyElements.forEach(familyFriendlyElement => {
+      let value = familyFriendlyElement.dataset.family
+      if (value == 0) {
+        let parent = familyFriendlyElement.closest('.item')
+        console.log(parent);
+        $(parent).toggle();
+      }
+    });
+  })
+
+  $(document).on('change', '.select-price', function() {
+    let sortingMethod = $(this).val();
+    if (sortingMethod == 'l2h') {
+      sortProductsPriceAscending();
+    } else if (sortingMethod == 'h2l') {
+      sortProductsPriceDescending();
+    }
+  });
+
+  function sortProductsPriceAscending() {
+    let houses = $('.item');
+    houses.sort(function(a, b) { 
+      return $(a).data("price")-$(b).data("price")
+    });
+    $('#housesContainer').html(houses);
+    
+  }
+
+  function sortProductsPriceDescending() {
+    let houses = $('.item');
+    houses.sort(function(a, b) { 
+      return $(b).data("price") - $(a).data("price")
+    });
+    $('#housesContainer').html(houses);
+  }
     
 });
