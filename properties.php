@@ -35,7 +35,7 @@ require_once __DIR__.'/component/top.php'?>
 
 
     <div class="site-section site-section-sm bg-light">
-      <div id="housesContainer">
+      <div id="housesContainer" class="row mb-5">
       
         
       </div>
