@@ -55,12 +55,9 @@ router.get("/1", async (req, res) => {
   };
 
   // Get a v2 signed URL for the file
-  const [url] = await storage
-    .bucket(BUCKET_NAME)
-    .file("puppy.jpeg")
-    .getSignedUrl(options);
+  const e = await storage.bucket(BUCKET_NAME).getFiles(options);
 
-  res.send(url);
+  res.send(e);
 });
 
 router.get("/upload", (req, res) => {
@@ -88,31 +85,6 @@ router.get("/upload", (req, res) => {
         res.send(getPublicUrlForItem(response[0].metadata.name))
       )
       .catch(err => console.log(err));
-  } catch (error) {
-    console.log(error);
-    res.send(error);
-  }
-});
-
-router.post("/login", (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    connection.execute(
-      "SELECT * FROM users WHERE email=?",
-      [email],
-      (err, rows) => {
-        console.log(rows);
-        const user = rows[0];
-        if (bcrypt.compareSync(password, user.password)) {
-          const token = jwt.sign(user.email, process.env.SECRET);
-          res.send({ ok: true, token });
-        } else {
-          res.send({ ok: false, msg: "Invalid login credentials" });
-        }
-        if (err) throw err;
-      }
-    );
   } catch (error) {
     console.log(error);
     res.send(error);
