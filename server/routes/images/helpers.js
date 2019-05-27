@@ -23,7 +23,6 @@ var myBucket = storage.bucket(BUCKET_NAME);
 
 // get public url for file
 var getPublicUrlForItem = file_name => {
-  console.log("fileName:", file_name);
   return `https://storage.googleapis.com/${BUCKET_NAME}/${file_name}`;
 };
 
@@ -37,7 +36,6 @@ const resizeAndUploadImage = (path, name) => {
       .toFile(resizedImgPath)
       .then(() => {
         uploadImage(resizedImgPath).then(newName => {
-          console.log("new Name:", newName);
           unlinkAsync(resizedImgPath).then(() => {
             return resolve(newName);
           });

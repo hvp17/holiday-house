@@ -62,37 +62,38 @@ router.post("/create", upload.array("images[]"), (req, res) => {
   try {
     const formValues = JSON.parse(req.body.form_values);
     const {
-      title,
-      description,
-      address,
-      type_fk,
-      start_date,
-      end_date,
+      txtTitle,
+      txtDescription,
+      txtAddress,
+      txtHouseType,
+      txtStartDate,
+      txtEndDate,
       user_fk,
-      rooms,
-      smoker_friendly,
-      family_friendly
+      txtSmoker,
+      txtFamily,
+      txtRooms,
+      txtPrice
     } = formValues;
-
+    console.log(formValues);
     connection.beginTransaction(function(err) {
       if (err) {
         throw err;
       }
       connection.query(
-        "INSERT INTO `houses` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO `houses` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         [
-          25,
-          title,
-          description,
-          address,
-          type_fk,
-          start_date,
-          end_date,
-          user_fk,
-          rooms,
-          smoker_friendly,
-          family_friendly,
-          price_per_night
+          null,
+          txtTitle,
+          txtDescription,
+          txtAddress,
+          txtHouseType ? txtHouseType : 1,
+          txtStartDate,
+          txtEndDate,
+          user_fk ? user_fk : 7,
+          txtRooms,
+          txtSmoker === "on" ? true : false,
+          txtFamily === "on" ? true : false,
+          txtPrice ? Number(txtPrice) : 0
         ],
         function(err, result) {
           if (err) {
@@ -100,49 +101,46 @@ router.post("/create", upload.array("images[]"), (req, res) => {
               throw err;
             });
           }
-
+          console.log("x", result);
           let links = [];
 
           Promise.map(req.files, file =>
             resizeAndUploadImage(file.path, file.filename)
           ).then(resizedLinks => {
-            links = [links, ...resizedLinks];
+            links = [...links, ...resizedLinks];
             Promise.map(req.files, file =>
               uploadImage(file.path, file.filename)
             ).then(fullSizeLinks => {
-              links = [links, ...fullSizeLinks];
-              connection.query(
-                "INSERT INTO `houses` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                [
-                  25,
-                  title,
-                  description,
-                  address,
-                  type_fk,
-                  start_date,
-                  end_date,
-                  user_fk,
-                  rooms,
-                  smoker_friendly,
-                  family_friendly
-                ],
-                function(err, result) {
-                  if (err) {
-                    connection.rollback(function() {
-                      throw err;
-                    });
-                  }
-                  connection.commit(function(err) {
+              links = [...links, ...fullSizeLinks];
+
+              links.forEach(link => {
+                console.log("inserting LINK: ", link);
+                connection.query(
+                  "INSERT INTO `images` VALUES (?, ?, ?)",
+                  [null, result.insertId, link],
+                  function(err, result) {
                     if (err) {
                       connection.rollback(function() {
                         throw err;
                       });
                     }
-                    console.log("Transaction Complete.");
-                    connection.end();
+                  }
+                );
+              });
+
+              connection.commit(function(err) {
+                if (err) {
+                  connection.rollback(function() {
+                    throw err;
                   });
                 }
-              );
+                console.log("Transaction Complete.");
+                connection.end();
+                res.send({
+                  stateus: 1,
+                  message: "Successfully created house!"
+                });
+              });
             });
           });
         }
