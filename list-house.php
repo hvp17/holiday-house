@@ -72,15 +72,15 @@ require_once __DIR__.'/component/top.php'?>
 							</div>
 							<div class="form-row">
 								<div class="form-holder">
-									<select class="form-control">
-									<option name="type" value="house">House Type</option>
+									<select name="txtHouseType" class="form-control">
+									<option name="type" value="1">House</option>
 									</select>
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-holder">
 								
-                                    <select class="form-control">
+                                    <select name="txtRooms" class="form-control">
                                         <option name="rooms" value="1">1 Room</option>
                                         <option name="rooms" value="2">2 Rooms</option>
                                         <option name="rooms" value="3">3 Rooms </option>
