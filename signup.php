@@ -1,6 +1,12 @@
 <?php
 $sCss = 'signup.css';
 require_once __DIR__.'/component/top.php'?>
+<script>
+	  var token = window.localStorage.getItem('token')
+	  if(token){
+		window.location.assign("/")
+	  }
+</script>
 <div class="wrapper">
             <form id="wizard">
         		<!-- SECTION 1 -->
