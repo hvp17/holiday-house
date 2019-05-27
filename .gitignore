@@ -59,3 +59,5 @@ typings/
 key.json
 # next.js build output
 .next
+
+connection.js
