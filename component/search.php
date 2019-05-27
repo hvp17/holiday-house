@@ -65,6 +65,8 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
 
 <?php
 $searchScript = true;
