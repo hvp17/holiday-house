@@ -50,15 +50,15 @@ router.post("/register", (req, res) => {
 
 router.post("/login", (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { txtEmail, txtPassword } = req.body;
 
     connection.execute(
       "SELECT * FROM users WHERE email=?",
-      [email],
+      [txtEmail],
       (err, rows) => {
         console.log(rows);
         const user = rows[0];
-        if (bcrypt.compareSync(password, user.password)) {
+        if (bcrypt.compareSync(txtPassword, user.password)) {
           const token = jwt.sign(
             { email: user.email, id: user.id },
             process.env.SECRET
