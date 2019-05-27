@@ -22,12 +22,7 @@ require_once __DIR__.'/component/top.php'?>
 									<input type="password" placeholder="Password" class="form-control" name="password">
 								</div>
 							</div>
-							<div class="form-row">
-								<div class="form-holder">
-									<input type="password" placeholder="Confirm Password" class="form-control">
-								</div>
-
-							</div>
+			
                             <button id="btnLogin" type="button" class="">Login</button>
 
 						</div>

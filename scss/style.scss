@@ -9,22 +9,25 @@
 /* Blocks */
 @import "site-blocks";
 
-
 button.tag {
-    background-color: #364e68;
-    color: white;
+  background-color: #364e68;
+  color: white;
 }
 button.tag:hover {
-    background-color: rgb(186, 186, 186);
-    color: white;
+  background-color: rgb(186, 186, 186);
+  color: white;
 }
 
- button.activeFilter {
-     background-color: #7cbd1e !important;
- }
+button.activeFilter {
+  background-color: #7cbd1e !important;
+}
 
- #select-date.invalid::after {
-    content: "Invalid date";
-    font-size: 0.9rem;
-    color: red;
- }
+#select-date.invalid::after {
+  content: "Invalid date";
+  font-size: 0.9rem;
+  color: red;
+}
+
+a#logout {
+  cursor: pointer;
+}

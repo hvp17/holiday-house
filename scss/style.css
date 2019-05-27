@@ -1380,4 +1380,8 @@ button.activeFilter {
   font-size: 0.9rem;
   color: red;
 }
+
+a#logout {
+  cursor: pointer;
+}
 /*# sourceMappingURL=style.css.map */

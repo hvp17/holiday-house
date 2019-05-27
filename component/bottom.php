@@ -75,6 +75,13 @@
         $('.loggedin2').append(`
         <a href="account.php">Account</a>
         `)
+        $('.loggedin3').append(`
+        <a id="logout">Log out</a>
+        `)
+      $(document).on('click', '#logout', function(){
+        localStorage.clear()
+        location.reload();
+      })
       }else{
 
         $('.loggedin1').append(`
