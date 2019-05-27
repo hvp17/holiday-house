@@ -116,7 +116,7 @@ if (isset($sScript)) {
   
 <?php } ?>
 <?php
-if ($searchScript) {
+if (isset($searchScript)) {
   ?>
   <script src="js/main/search.js"></script>
  

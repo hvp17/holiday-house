@@ -45,7 +45,8 @@ router.post("/create", (req, res) => {
       user_id,
       rooms,
       smoker_friendly,
-      family_friendly
+      family_friendly,
+      price_per_night
     } = req.body;
 
     connection.query(
@@ -61,7 +62,8 @@ router.post("/create", (req, res) => {
         user_id,
         rooms,
         smoker_friendly,
-        family_friendly
+        family_friendly,
+        price_per_night
       ],
       (err, response) => {
         console.log(req.body);
