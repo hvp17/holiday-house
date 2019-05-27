@@ -1,3 +1,11 @@
+$(document).on("click", 'a[href="#finish"]', function() {
+var data = $("#frmListHouse").serialize()
+console.log(data)
+
+}
+)
+
+
 
 
 $(function() {

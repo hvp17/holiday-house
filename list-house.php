@@ -63,6 +63,14 @@ require_once __DIR__.'/component/top.php'?>
 								<div class="form-holder">
 									<input type="text" placeholder="Address" class="form-control" name="txtAddress">
 								</div>
+								<div class="form-holder">
+                                Family Friendly
+									<input type="checkbox" class="form-control" name="txtFamily">
+								</div>
+								<div class="form-holder">
+                                Smoker Friendly
+									<input type="checkbox" class="form-control" name="txtSmoker">
+								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-holder">
@@ -105,10 +113,39 @@ require_once __DIR__.'/component/top.php'?>
 							<p>Please fill with additional info</p>
 						
 							<div class="form-row">
+                            Start date
 								<div class="form-holder">
 									<input type="date" class="form-control" name="txtStartDate">
 								</div>
 							</div>
+							<div class="form-row">
+                            End Date
+								<div class="form-holder">
+									<input type="date" class="form-control" name="txtEndDate">
+								</div>
+							</div>
+						</div>
+					</div>
+                </section>
+                <!-- SECTION 4 -->
+                <h2></h2>
+                <section>
+                    <div class="inner">
+						<div class="image-holder">
+							<img src="images/form-wizard-3.jpg" alt="">
+						</div>
+						<div class="form-content">
+							<div class="form-header">
+								<h3>List House</h3>
+							</div>
+							<p>Please upload 1 image of your listing</p>
+						
+							<div class="form-row">
+								<div class="form-holder">
+									<input type="file" class="form-control" name="txtImage">
+								</div>
+							</div>
+							
 						</div>
 					</div>
                 </section>
