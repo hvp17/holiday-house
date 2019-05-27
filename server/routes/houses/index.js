@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const jwt = require("jsonwebtoken");
-const multer = require("multer");
 
-const MulterGoogleCloudStorage = require("multer-google-storage");
+const multer = require("multer");
+const Promise = require("bluebird");
 const connection = require("../../connection");
-const { uploadImage } = require("../images/helpers");
+const { uploadImage, resizeAndUploadImage } = require("../images/helpers");
 
 router.get("/", (req, res) => {
   try {
@@ -61,79 +60,91 @@ const upload = multer({ storage });
 
 router.post("/create", upload.array("images[]"), (req, res) => {
   try {
+    const formValues = JSON.parse(req.body.form_values);
     const {
-      title,
-      description,
-      address,
-      type_fk,
-      start_date,
-      end_date,
+      txtTitle,
+      txtDescription,
+      txtAddress,
+      txtHouseType,
+      txtStartDate,
+      txtEndDate,
       user_fk,
-      rooms,
-      smoker_friendly,
-      family_friendly
-    } = req.body;
-
-    console.log("files", req.body);
-    console.log("files2", req.files);
-    const links = [];
-    req.files.forEach(file => {
-      const link = uploadImage(file.path);
-      links.push(link);
-    });
-    res.send(links);
-    // res.json({ fileName: req.file.filename });
-    // res.end();
-    // res.send(req.body);
-    return;
-    /* Begin transaction */
+      txtSmoker,
+      txtFamily,
+      txtRooms,
+      txtPrice
+    } = formValues;
+    console.log(formValues);
     connection.beginTransaction(function(err) {
       if (err) {
         throw err;
       }
-      connection.query("INSERT INTO images SET name=?", "sameer", function(
-        err,
-        result
-      ) {
-        if (err) {
-          connection.rollback(function() {
-            throw err;
-          });
-        }
-
-        connection.query(
-          "INSERT INTO `houses` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-          [
-            25,
-            title,
-            description,
-            address,
-            type_fk,
-            start_date,
-            end_date,
-            user_fk,
-            rooms,
-            smoker_friendly,
-            family_friendly
-          ],
-          function(err, result) {
-            if (err) {
-              connection.rollback(function() {
-                throw err;
-              });
-            }
-            connection.commit(function(err) {
-              if (err) {
-                connection.rollback(function() {
-                  throw err;
-                });
-              }
-              console.log("Transaction Complete.");
-              connection.end();
+      connection.query(
+        "INSERT INTO `houses` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        [
+          null,
+          txtTitle,
+          txtDescription,
+          txtAddress,
+          txtHouseType ? txtHouseType : 1,
+          txtStartDate,
+          txtEndDate,
+          user_fk ? user_fk : 7,
+          txtRooms,
+          txtSmoker === "on" ? true : false,
+          txtFamily === "on" ? true : false,
+          txtPrice ? Number(txtPrice) : 0
+        ],
+        function(err, result) {
+          if (err) {
+            connection.rollback(function() {
+              throw err;
             });
           }
-        );
-      });
+          console.log("x", result);
+          let links = [];
+
+          Promise.map(req.files, file =>
+            resizeAndUploadImage(file.path, file.filename)
+          ).then(resizedLinks => {
+            links = [...links, ...resizedLinks];
+            Promise.map(req.files, file =>
+              uploadImage(file.path, file.filename)
+            ).then(fullSizeLinks => {
+              links = [...links, ...fullSizeLinks];
+
+              links.forEach(link => {
+                console.log("inserting LINK: ", link);
+                connection.query(
+                  "INSERT INTO `images` VALUES (?, ?, ?)",
+                  [null, result.insertId, link],
+                  function(err, result) {
+                    if (err) {
+                      connection.rollback(function() {
+                        throw err;
+                      });
+                    }
+                  }
+                );
+              });
+
+              connection.commit(function(err) {
+                if (err) {
+                  connection.rollback(function() {
+                    throw err;
+                  });
+                }
+                console.log("Transaction Complete.");
+                connection.end();
+                res.send({
+                  stateus: 1,
+                  message: "Successfully created house!"
+                });
+              });
+            });
+          });
+        }
+      );
     });
     /* End transaction */
   } catch (error) {
