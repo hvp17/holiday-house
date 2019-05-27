@@ -15,7 +15,7 @@ require_once __DIR__.'/component/top.php'?>
 
     <div class="wrapper">
             <form id="frmListHouse">
-        		<!-- SECTION 1 -->
+        		<!-- SECTION 1  -->
                 <h2></h2>
                 <section>
                     <div class="inner">
@@ -47,7 +47,7 @@ require_once __DIR__.'/component/top.php'?>
 					</div>
                 </section>
 
-				<!-- SECTION 2 -->
+				 <!-- SECTION 2  -->
                 <h2></h2>
                 <section>
                     <div class="inner">
@@ -63,34 +63,28 @@ require_once __DIR__.'/component/top.php'?>
 								<div class="form-holder">
 									<input type="text" placeholder="Address" class="form-control" name="txtAddress">
 								</div>
+							
+							</div>
+							<div class="form-row">
 								<div class="form-holder">
-                                Family Friendly
-									<input type="checkbox" class="form-control" name="txtFamily">
-								</div>
-								<div class="form-holder">
-                                Smoker Friendly
-									<input type="checkbox" class="form-control" name="txtSmoker">
+									<select class="form-control">
+									<option name="type" value="house">House Type</option>
+									</select>
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-holder">
+								
                                     <select class="form-control">
-                                    <option name="type" value="house">House</option>
-                                    </select>
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-holder">
-                                    <select class="form-control">
-                                        <option name="rooms" value="1">1</option>
-                                        <option name="rooms" value="2">2</option>
-                                        <option name="rooms" value="3">3</option>
-                                        <option name="rooms" value="4">4</option>
-                                        <option name="rooms" value="5">5</option>
-                                        <option name="rooms" value="6">6</option>
-                                        <option name="rooms" value="7">7</option>
-                                        <option name="rooms" value="8">8</option>
-                                        <option name="rooms" value="9">9</option>
+                                        <option name="rooms" value="1">1 Room</option>
+                                        <option name="rooms" value="2">2 Rooms</option>
+                                        <option name="rooms" value="3">3 Rooms </option>
+                                        <option name="rooms" value="4">4 Rooms </option>
+                                        <option name="rooms" value="5">5 Rooms </option>
+                                        <option name="rooms" value="6">6 Rooms </option>
+                                        <option name="rooms" value="7">7 Rooms </option>
+                                        <option name="rooms" value="8">8 Rooms </option>
+                                        <option name="rooms" value="9">9 Rooms </option>
                                     </select>
 								</div>
 							</div>
@@ -98,8 +92,31 @@ require_once __DIR__.'/component/top.php'?>
 						</div>
 					</div>
                 </section>
+				 <!-- SECTION 3 -->
+                <h2></h2>
+				<section>
+					<div class="inner">
+						<div class="image-holder">
+							<img src="images/form-wizard-2.jpg" alt="">
+						</div>
+						<div class="form-content">
+							<div class="form-header">
+								<h3><b>List House</b></h3>
+							</div>
+							<p>Please fill with additional info</p>
+							<div class="form-row">
+								<div class="form-holder">
+									Family Friendly
+									<input type="checkbox" class="form-control" name="txtFamily">
+									Smoker Friendly
+									<input type="checkbox" class="form-control" name="txtSmoker">
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
 
-                <!-- SECTION 3 -->
+                <!-- SECTION 4  -->
                 <h2></h2>
                 <section>
                     <div class="inner">
@@ -126,8 +143,8 @@ require_once __DIR__.'/component/top.php'?>
 							</div>
 						</div>
 					</div>
-                </section>
-                <!-- SECTION 4 -->
+                </section> 
+                <!-- SECTION 5 -->
                 <h2></h2>
                 <section>
                     <div class="inner">
@@ -138,11 +155,12 @@ require_once __DIR__.'/component/top.php'?>
 							<div class="form-header">
 								<h3>List House</h3>
 							</div>
-							<p>Please upload 1 image of your listing</p>
+							<p>Please upload at least 1 image of your listing</p>
 						
 							<div class="form-row">
-								<div class="form-holder">
-									<input type="file" class="form-control" name="txtImage">
+								<div class="form-holder images">
+									<input type="file" id="image" multiple accept=".jpg, .jpeg, .png" class="form-control" name="image[]">
+								
 								</div>
 							</div>
 							

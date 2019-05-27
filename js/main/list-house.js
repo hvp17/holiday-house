@@ -1,12 +1,18 @@
+// Insert house with images
 $(document).on("click", 'a[href="#finish"]', function() {
-var data = $("#frmListHouse").serialize()
-console.log(data)
-
-}
-)
-
-
-
+  var data = $("#frmListHouse").serialize();
+  console.log(data);
+  var imageFiles = $("#image")[0].files;
+  console.log("imageFiles ", imageFiles);
+  $.ajax({
+    url: "http://localhost:3000/houses/create",
+    data: { data: data, imageFiles: imageFiles },
+    method: "POST",
+    dataType: "JSON"
+  }).always(function(jData) {
+    console.log("jData ", jData);
+  });
+});
 
 $(function() {
   $("#frmListHouse").steps({
