@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Vært: localhost:3306
--- Genereringstid: 27. 05 2019 kl. 11:59:39
--- Serverversion: 5.7.23
--- PHP-version: 7.2.10
+-- Host: localhost:8889
+-- Generation Time: May 28, 2019 at 02:09 PM
+-- Server version: 5.7.25
+-- PHP Version: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur-dump for tabellen `houses`
+-- Table structure for table `houses`
 --
 
 CREATE TABLE `houses` (
@@ -42,19 +42,24 @@ CREATE TABLE `houses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Data dump for tabellen `houses`
+-- Dumping data for table `houses`
 --
 
 INSERT INTO `houses` (`id`, `title`, `description`, `address`, `type_fk`, `start_date`, `end_date`, `user_fk`, `rooms`, `smoker_friendly`, `family_friendly`, `price_per_night`) VALUES
-(1, 'Great title1', 'great description1', 'addres 2231ff', 1, '2019-05-14 14:54:37', '2019-05-14 22:00:00', 7, 3, 1, 0, 800),
-(2, 'Great title2', 'great description2', 'addres 2231ff', 1, '2019-05-14 14:54:37', '2019-05-14 22:00:00', 7, 3, 1, 0, 2000),
-(3, 'Great title3', 'great description3', 'addres 2231ff', 1, '2019-05-14 14:54:37', '2019-05-14 22:00:00', 7, 3, 1, 0, 1300),
-(4, 'Great title4', 'great description4', 'addres 2231ff', 1, '2019-05-14 14:54:37', '2019-05-14 22:00:00', 7, 3, 1, 0, 4200);
+(11, 'What a house', 'rthis is a description', 'Tulpiu 2-4 Panevezys, Lithuania', 1, '2019-05-08 22:00:00', '2019-05-30 22:00:00', 7, 4, 0, 1, 283823932),
+(15, 'SWEET', 'HOME ALABAMA', '213123123', 2, '2019-06-28 22:00:00', '2019-07-12 22:00:00', 7, 5, 1, 0, 2312),
+(16, 'Nice house', 'bla bla bla', 'Nice house', 2, '2019-04-30 22:00:00', '2019-05-31 22:00:00', 7, 5, 1, 0, 4593),
+(17, 'Nice house', 'bla bla bla', 'Nice house', 2, '2019-04-30 22:00:00', '2019-05-31 22:00:00', 7, 5, 1, 0, 4593),
+(18, 'Nice house', 'bla bla bla', 'Nice house', 2, '2019-04-30 22:00:00', '2019-05-31 22:00:00', 7, 5, 1, 0, 4593),
+(19, 'Nice house', 'bla bla bla', 'Nice house', 2, '2019-04-30 22:00:00', '2019-05-31 22:00:00', 7, 5, 1, 0, 4593),
+(20, 'Nice house', 'bla bla bla', 'Nice house', 2, '2019-04-30 22:00:00', '2019-05-31 22:00:00', 7, 5, 1, 0, 4593),
+(21, 'Nice house', 'bla bla bla', 'Nice house', 2, '2019-04-30 22:00:00', '2019-05-31 22:00:00', 7, 5, 1, 0, 4593),
+(22, 'Nice house', 'bla bla bla', 'Nice house', 2, '2019-04-30 22:00:00', '2019-05-31 22:00:00', 7, 5, 1, 0, 4593);
 
 -- --------------------------------------------------------
 
 --
--- Struktur-dump for tabellen `images`
+-- Table structure for table `images`
 --
 
 CREATE TABLE `images` (
@@ -63,10 +68,44 @@ CREATE TABLE `images` (
   `path` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `images`
+--
+
+INSERT INTO `images` (`id`, `house_fk`, `path`) VALUES
+(12, 11, 'https://storage.googleapis.com/holiday-house/thumbnail_hero_bg_3.jpg'),
+(13, 11, 'https://storage.googleapis.com/holiday-house/thumbnail_hero_bg_4.jpg'),
+(14, 11, 'https://storage.googleapis.com/holiday-house/thumbnail_img_1.jpg'),
+(15, 11, 'https://storage.googleapis.com/holiday-house/thumbnail_img_2.jpg'),
+(16, 11, 'https://storage.googleapis.com/holiday-house/thumbnail_img_3.jpg'),
+(17, 11, 'https://storage.googleapis.com/holiday-house/hero_bg_3.jpg'),
+(18, 11, 'https://storage.googleapis.com/holiday-house/hero_bg_4.jpg'),
+(19, 11, 'https://storage.googleapis.com/holiday-house/img_1.jpg'),
+(20, 11, 'https://storage.googleapis.com/holiday-house/img_2.jpg'),
+(21, 11, 'https://storage.googleapis.com/holiday-house/img_3.jpg'),
+(22, 14, 'https://storage.googleapis.com/holiday-house/thumbnail_person_6.jpg'),
+(23, 14, 'https://storage.googleapis.com/holiday-house/person_6.jpg'),
+(24, 15, 'https://storage.googleapis.com/holiday-house/thumbnail_about.jpg'),
+(25, 15, 'https://storage.googleapis.com/holiday-house/about.jpg'),
+(26, 16, 'https://storage.googleapis.com/holiday-house/thumbnail_puppy.jpeg'),
+(27, 16, 'https://storage.googleapis.com/holiday-house/puppy.jpeg'),
+(28, 17, 'https://storage.googleapis.com/holiday-house/thumbnail_puppy.jpeg'),
+(29, 17, 'https://storage.googleapis.com/holiday-house/puppy.jpeg'),
+(30, 18, 'https://storage.googleapis.com/holiday-house/thumbnail_puppy.jpeg'),
+(31, 18, 'https://storage.googleapis.com/holiday-house/puppy.jpeg'),
+(32, 19, 'https://storage.googleapis.com/holiday-house/thumbnail_puppy.jpeg'),
+(33, 19, 'https://storage.googleapis.com/holiday-house/puppy.jpeg'),
+(34, 20, 'https://storage.googleapis.com/holiday-house/thumbnail_puppy.jpeg'),
+(35, 20, 'https://storage.googleapis.com/holiday-house/puppy.jpeg'),
+(36, 21, 'https://storage.googleapis.com/holiday-house/thumbnail_puppy.jpeg'),
+(37, 21, 'https://storage.googleapis.com/holiday-house/puppy.jpeg'),
+(38, 22, 'https://storage.googleapis.com/holiday-house/thumbnail_puppy.jpeg'),
+(39, 22, 'https://storage.googleapis.com/holiday-house/puppy.jpeg');
+
 -- --------------------------------------------------------
 
 --
--- Struktur-dump for tabellen `types`
+-- Table structure for table `types`
 --
 
 CREATE TABLE `types` (
@@ -75,16 +114,17 @@ CREATE TABLE `types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Data dump for tabellen `types`
+-- Dumping data for table `types`
 --
 
 INSERT INTO `types` (`id`, `name`) VALUES
-(1, 'House');
+(1, 'House'),
+(2, 'Villa');
 
 -- --------------------------------------------------------
 
 --
--- Struktur-dump for tabellen `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -96,18 +136,19 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Data dump for tabellen `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `password`) VALUES
-(7, 'TestingName1', 'TestingEmail1', '231234444', '$2b$10$rmLLAYsVaNJWNdxgPRX4G.ennXqmx0JiRWWZ6wjw2jiHAQHjhz0r2');
+(7, 'TestingName1', 'TestingEmail1', '231234444', '$2b$10$rmLLAYsVaNJWNdxgPRX4G.ennXqmx0JiRWWZ6wjw2jiHAQHjhz0r2'),
+(9, 'Tomas', 'user@gmail.com', '11233423', '$2a$10$X.FXrUWclybIxmvEJBzFuuudXiXdBjS/K7IrDgz9Hx46zXNGh.vdG');
 
 --
--- Begrænsninger for dumpede tabeller
+-- Indexes for dumped tables
 --
 
 --
--- Indeks for tabel `houses`
+-- Indexes for table `houses`
 --
 ALTER TABLE `houses`
   ADD PRIMARY KEY (`id`),
@@ -116,7 +157,7 @@ ALTER TABLE `houses`
   ADD KEY `type_id` (`type_fk`);
 
 --
--- Indeks for tabel `images`
+-- Indexes for table `images`
 --
 ALTER TABLE `images`
   ADD PRIMARY KEY (`id`),
@@ -124,60 +165,60 @@ ALTER TABLE `images`
   ADD KEY `house_id` (`house_fk`);
 
 --
--- Indeks for tabel `types`
+-- Indexes for table `types`
 --
 ALTER TABLE `types`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Indeks for tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Brug ikke AUTO_INCREMENT for slettede tabeller
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- Tilføj AUTO_INCREMENT i tabel `houses`
+-- AUTO_INCREMENT for table `houses`
 --
 ALTER TABLE `houses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- Tilføj AUTO_INCREMENT i tabel `images`
+-- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- Tilføj AUTO_INCREMENT i tabel `types`
+-- AUTO_INCREMENT for table `types`
 --
 ALTER TABLE `types`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Tilføj AUTO_INCREMENT i tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- Begrænsninger for dumpede tabeller
+-- Constraints for dumped tables
 --
 
 --
--- Begrænsninger for tabel `houses`
+-- Constraints for table `houses`
 --
 ALTER TABLE `houses`
   ADD CONSTRAINT `houses_ibfk_1` FOREIGN KEY (`user_fk`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `houses_ibfk_2` FOREIGN KEY (`type_fk`) REFERENCES `types` (`id`);
 
 --
--- Begrænsninger for tabel `images`
+-- Constraints for table `images`
 --
 ALTER TABLE `images`
   ADD CONSTRAINT `images_ibfk_1` FOREIGN KEY (`house_fk`) REFERENCES `houses` (`id`);
