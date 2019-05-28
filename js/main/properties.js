@@ -42,7 +42,16 @@ $(document).ready(function() {
   let roomsSelect = document.getElementById('select-rooms')
   roomsSelect.addEventListener('change', () => {
     let roomsSelectValue = roomsSelect[roomsSelect.selectedIndex].value
-    console.log(roomsSelectValue);
+    let roomsClassItems = document.querySelectorAll('.rooms-class')
+    roomsClassItems.forEach(roomsClassItem => {
+      let dataValue = $(roomsClassItem).data('rooms')
+      let parent = $(roomsClassItem).parent();
+      if (roomsSelectValue > dataValue) {
+        $(parent).hide();
+      } else if (roomsSelectValue < dataValue) {
+        $(parent).show();
+      }
+    })
   })
 
   $.ajax({
@@ -61,7 +70,7 @@ $(document).ready(function() {
         <div class="col-md-6 col-lg-4 mb-4 item" data-price="${
           house.price_per_night
         }">
-          <div class="property-entry h-100 date-class" data-date="${convertTimeStamp(house.start_date)}" data-rooms="${house.rooms}">
+          <div class="property-entry h-100 date-class rooms-class" data-date="${convertTimeStamp(house.start_date)}" data-rooms="${house.rooms}">
             <a href="property-details.php?id=${
               house.id
             }" class="property-thumbnail">
