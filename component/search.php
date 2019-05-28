@@ -3,7 +3,7 @@
         <div class="row">
           <form class="form-search col-md-12 frmSearch" style="margin-top: -100px;">
             <div class="row  align-items-end">
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <label for="list-types">Listing Types</label>
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
@@ -16,27 +16,30 @@
               </div>
               
              
-              <div class="col-md-3">
-                <label for="select-city">Select City</label>
+              <div class="col-md-4">
+                <label for="select-city">Rooms</label>
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
-                  <select name="select-city" id="select-city" class="form-control d-block rounded-0">
-                    <option value="copenhagen">Copenhagen</option>
-                    <option value="aarhus">Aarhus</option>
-                    <option value="odense">Odense</option>
+                  <select name="select-rooms" id="select-rooms" class="form-control d-block rounded-0">
+                    <option name="rooms" value="1">1 Room</option>
+                    <option name="rooms" value="2">2 Rooms</option>
+                    <option name="rooms" value="3">3 Rooms </option>
+                    <option name="rooms" value="4">4 Rooms </option>
+                    <option name="rooms" value="5">5 Rooms </option>
+                    <option name="rooms" value="6">6 Rooms </option>
+                    <option name="rooms" value="7">7 Rooms </option>
+                    <option name="rooms" value="8">8 Rooms </option>
+                    <option name="rooms" value="9">9 Rooms </option>
                   </select>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <label for="select-city">Date</label>
                 <div class="select-wrap">
                   <span class="icon"></span>
                   <input name="select-date" id="select-date" type="date" class="form-control d-block rounded-0">
                
                 </div>
-              </div>
-              <div class="col-md-3">
-                <button type="button" class="btn btn-success text-white btn-block rounded-0 btnSearch">Search </button>
               </div>
             </div>
           </form>

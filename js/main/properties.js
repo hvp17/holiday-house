@@ -15,24 +15,35 @@ $(document).ready(function() {
     }
   }
 
-  
   let date = document.getElementById('select-date')
-  console.log(date);
-  
-  function getTimeStamp() {
-    date.addEventListener('change', () => {
-      let value = date.value
-      value = value.split('-')
-      return new Date(value).getTime()
-    })
-  }
+  date.addEventListener('change', () => {
+    let dateValue = date.value
+    dateValue = dateValue.split('-')
+    timeStamp = new Date(dateValue).getTime()
+    // console.log(timeStamp);
+    
+
+    let dateClassItems = document.querySelectorAll(".date-class");
+    dateClassItems.forEach(dateClassItem => {
+      let dataValue = $(dateClassItem).data('date')
+      let parent = $(dateClassItem).parent();
+      if (timeStamp > dataValue == true) {
+        $(parent).hide();
+      } else if (timeStamp > dataValue == false) {
+        $(parent).show();
+      }
+    });
+  })
 
   function convertTimeStamp(date) {
     return new Date(date).getTime()
   }
-  
-  
-  
+
+  let roomsSelect = document.getElementById('select-rooms')
+  roomsSelect.addEventListener('change', () => {
+    let roomsSelectValue = roomsSelect[roomsSelect.selectedIndex].value
+    console.log(roomsSelectValue);
+  })
 
   $.ajax({
     url: "http://localhost:3000/houses",
@@ -45,17 +56,16 @@ $(document).ready(function() {
         dataType: "JSON"
       }).always(function(jImagesData) {
         const { status, images } = jImagesData;
-        const firstThumbnail = images.find(x => x.path.includes("thumbnail"))
-          .path;
+        const firstThumbnail = images.find(x => x.path.includes("thumbnail"));
         $("#housesContainer").append(`   
         <div class="col-md-6 col-lg-4 mb-4 item" data-price="${
           house.price_per_night
-        }" data-date="${convertTimeStamp(house.start_date)}" data-rooms="${house.rooms}">
-          <div class="property-entry h-100">
+        }">
+          <div class="property-entry h-100 date-class" data-date="${convertTimeStamp(house.start_date)}" data-rooms="${house.rooms}">
             <a href="property-details.php?id=${
               house.id
             }" class="property-thumbnail">
-              <img src="${firstThumbnail}" alt="Image" class="img-fluid">
+              <img src="${firstThumbnail.path}" alt="Image" class="img-fluid">
             </a>
             <div class="p-4 property-body">
               <h2 class="property-title"><a href="property-details.html">${
