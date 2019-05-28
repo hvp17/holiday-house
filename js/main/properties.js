@@ -15,6 +15,25 @@ $(document).ready(function() {
     }
   }
 
+  
+  let date = document.getElementById('select-date')
+  console.log(date);
+  
+  function getTimeStamp() {
+    date.addEventListener('change', () => {
+      let value = date.value
+      value = value.split('-')
+      return new Date(value).getTime()
+    })
+  }
+
+  function convertTimeStamp(date) {
+    return new Date(date).getTime()
+  }
+  
+  
+  
+
   $.ajax({
     url: "http://localhost:3000/houses",
     dataType: "JSON"
@@ -31,7 +50,7 @@ $(document).ready(function() {
         $("#housesContainer").append(`   
         <div class="col-md-6 col-lg-4 mb-4 item" data-price="${
           house.price_per_night
-        }">
+        }" data-date="${convertTimeStamp(house.start_date)}" data-rooms="${house.rooms}">
           <div class="property-entry h-100">
             <a href="property-details.php?id=${
               house.id
