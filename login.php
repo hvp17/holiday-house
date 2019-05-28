@@ -28,6 +28,8 @@ require_once __DIR__.'/component/top.php'?>
 									<input type="password" placeholder="Password" class="form-control" name="txtPassword">
 								</div>
 							</div>
+
+							<p id="msgError"></p>
 			
                             <button id="btnLogin" type="button" class="">Login</button>
 

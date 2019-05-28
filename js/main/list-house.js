@@ -1,4 +1,19 @@
 // Insert house with images
+
+$(document).ready(function() {
+  $.ajax({
+    url: "http://localhost:3000/filters/getTypes",
+    dataType: "JSON"
+  }).always(function(jTypeData) {
+    let { status, types } = jTypeData;
+    types.forEach(type => {
+      $("#type-select").append(`
+         <option name="type" value="${type.id}">${type.name}</option>
+      `);
+    });
+  });
+});
+
 $(document).on("click", 'a[href="#finish"]', function() {
   var formData = $("#frmListHouse").serializeArray();
   var obj = {};
@@ -26,6 +41,7 @@ $(document).on("click", 'a[href="#finish"]', function() {
     contentType: false,
     type: "POST",
     success: function(data) {
+      window.location.href = "/properties.php";
       alert("success", data);
     }
   }).always(function(jData) {

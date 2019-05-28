@@ -8,9 +8,8 @@
                 <div class="select-wrap">
                   <span class="icon icon-arrow_drop_down"></span>
                   <select name="list-types" id="list-types" class="form-control d-block rounded-0">
-                    <option value="villa">Villa</option>
-                    <option value="apartment">Apartment</option>
-                    <option value="sommerHouse">Sommerhouse</option>
+                    <option value="All">All</option>
+                  
                   </select>
                 </div>
               </div>

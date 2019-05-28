@@ -15,17 +15,16 @@ $(document).ready(function() {
     }
   }
 
-  let date = document.getElementById('select-date')
-  date.addEventListener('change', () => {
-    let dateValue = date.value
-    dateValue = dateValue.split('-')
-    timeStamp = new Date(dateValue).getTime()
+  let date = document.getElementById("select-date");
+  date.addEventListener("change", () => {
+    let dateValue = date.value;
+    dateValue = dateValue.split("-");
+    timeStamp = new Date(dateValue).getTime();
     // console.log(timeStamp);
-    
 
     let dateClassItems = document.querySelectorAll(".date-class");
     dateClassItems.forEach(dateClassItem => {
-      let dataValue = $(dateClassItem).data('date')
+      let dataValue = $(dateClassItem).data("date");
       let parent = $(dateClassItem).parent();
       if (timeStamp > dataValue == true) {
         $(parent).hide();
@@ -33,26 +32,57 @@ $(document).ready(function() {
         $(parent).show();
       }
     });
-  })
+  });
 
   function convertTimeStamp(date) {
-    return new Date(date).getTime()
+    return new Date(date).getTime();
   }
 
-  let roomsSelect = document.getElementById('select-rooms')
-  roomsSelect.addEventListener('change', () => {
-    let roomsSelectValue = roomsSelect[roomsSelect.selectedIndex].value
-    let roomsClassItems = document.querySelectorAll('.rooms-class')
+  let roomsSelect = document.getElementById("select-rooms");
+  roomsSelect.addEventListener("change", () => {
+    let roomsSelectValue = roomsSelect[roomsSelect.selectedIndex].value;
+    let roomsClassItems = document.querySelectorAll(".rooms-class");
     roomsClassItems.forEach(roomsClassItem => {
-      let dataValue = $(roomsClassItem).data('rooms')
+      let dataValue = $(roomsClassItem).data("rooms");
       let parent = $(roomsClassItem).parent();
       if (roomsSelectValue > dataValue) {
         $(parent).hide();
       } else if (roomsSelectValue < dataValue) {
         $(parent).show();
       }
-    })
-  })
+    });
+  });
+
+  let typeSelect = document.getElementById("list-types");
+  typeSelect.addEventListener("change", () => {
+    let typesSelectValue = typeSelect[typeSelect.selectedIndex].value;
+    let typesClassItems = document.querySelectorAll(".type-class");
+    typesClassItems.forEach(typesClassItem => {
+      console.log(typesClassItem);
+      let dataValue = $(typesClassItem).data("type");
+      let parent = $(typesClassItem).parent();
+      console.log(typesSelectValue, dataValue);
+      if (Number(typesSelectValue) === dataValue) {
+        $(parent).show();
+      } else if (typesSelectValue === "All") {
+        $(parent).show();
+      } else {
+        $(parent).hide();
+      }
+    });
+  });
+
+  $.ajax({
+    url: "http://localhost:3000/filters/getTypes",
+    dataType: "JSON"
+  }).always(function(jTypeData) {
+    let { status, types } = jTypeData;
+    types.forEach(type => {
+      $("#list-types").append(`
+         <option value="${type.id}">${type.name}</option>
+      `);
+    });
+  });
 
   $.ajax({
     url: "http://localhost:3000/houses",
@@ -70,7 +100,9 @@ $(document).ready(function() {
         <div class="col-md-6 col-lg-4 mb-4 item" data-price="${
           house.price_per_night
         }">
-          <div class="property-entry h-100 date-class rooms-class" data-date="${convertTimeStamp(house.start_date)}" data-rooms="${house.rooms}">
+          <div class="property-entry h-100 date-class rooms-class type-class" data-date="${convertTimeStamp(
+            house.start_date
+          )}" data-rooms="${house.rooms}" data-type="${house.type_fk}">
             <a href="property-details.php?id=${
               house.id
             }" class="property-thumbnail">
