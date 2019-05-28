@@ -56,7 +56,8 @@ router.post("/login", (req, res) => {
       "SELECT * FROM users WHERE email=?",
       [txtEmail],
       (err, rows) => {
-        console.log(rows);
+        if (rows.length < 1)
+          return res.send({ status: 0, message: "Failed to login" });
         const user = rows[0];
         if (bcrypt.compareSync(txtPassword, user.password)) {
           const token = jwt.sign(
