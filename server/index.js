@@ -5,6 +5,7 @@ const app = express();
 const userRoutes = require("./routes/user");
 const imagesRoutes = require("./routes/images");
 const housesRoutes = require("./routes/houses");
+const filtersRoutes = require("./routes/filters");
 const bodyParser = require("body-parser");
 const port = 3000;
 
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/user", userRoutes);
 app.use("/images", imagesRoutes);
 app.use("/houses", housesRoutes);
+app.use("/filters", filtersRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello!");

@@ -135,7 +135,6 @@ router.post("/create", upload.array("images[]"), (req, res) => {
                   });
                 }
                 console.log("Transaction Complete.");
-                connection.end();
                 res.send({
                   stateus: 1,
                   message: "Successfully created house!"
