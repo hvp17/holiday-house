@@ -32,7 +32,7 @@ const resizeAndUploadImage = (path, name) => {
   return new Promise((resolve, reject) => {
     const resizedImgPath = `./uploads/thumbnail_${name}`;
     sharp(path)
-      .resize({ height: 200 })
+      .resize({ width: 400 })
       .toFile(resizedImgPath)
       .then(() => {
         uploadImage(resizedImgPath).then(newName => {
