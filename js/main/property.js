@@ -21,6 +21,18 @@ function isSmokerFriendly(house) {
 }
 
 $(document).ready(function() {
+  $(".clickmeimage").on("click", function() {
+    console.log($(this));
+    var theGoodStuff = $(this).find(".gal-item");
+    console.log(theGoodStuff);
+    $.magnificPopup.open({
+      items: {
+        src: theGoodStuff
+      },
+      type: "inline"
+    });
+  });
+
   $.ajax({
     url: "http://localhost:3000/houses/one/" + c,
     dataType: "JSON"
@@ -31,9 +43,8 @@ $(document).ready(function() {
     startDate = new Date(house.start_date);
     endDate = new Date(house.end_date);
 
-    $(
-      "#housesContainerSingle"
-    ).append(`<div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/hero_bg_2.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+    $("#housesContainerSingle").append(`
+    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/hero_bg_2.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
       <div class="container">
         <div class="row align-items-center text-left">
           <div class="col-md-10">
@@ -116,7 +127,7 @@ $(document).ready(function() {
           <div class="col-lg-4">
 
             <div class="bg-white widget border rounded">
-
+   
               <h3 class="h4 text-black widget-title mb-3">Contact Owner</h3>
               <form action="" class="form-contact-agent">
                 <div class="form-group">
@@ -135,15 +146,43 @@ $(document).ready(function() {
       dataType: "JSON"
     }).always(function(jData) {
       const { status, images } = jData;
-      console.log("images response: ", status, images);
+      if (status !== 1) return;
+      var siteMagnificPopup = function() {
+        $(".image-popup").magnificPopup({
+          type: "image",
+          closeOnContentClick: true,
+          closeBtnInside: false,
+          fixedContentPos: true,
+          mainClass: "mfp-no-margins mfp-with-zoom", // class to remove default margin from left and right side
+          gallery: {
+            enabled: true,
+            navigateByImgClick: true,
+            preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
+          },
+          image: {
+            verticalFit: true
+          },
+          zoom: {
+            enabled: true,
+            duration: 300 // don't foget to change the duration also in CSS
+          }
+        });
+      };
 
-      images.forEach(element => {
+      images.forEach(image => {
+        // const regex = new RegExp("[^\\]*(?=[.][a-zA-Z]+$)");
+        if (!image.path.includes("thumbnail")) return;
+        const bigURL = image.path.replace("thumbnail_", "");
+
         $("#imagesContainer").append(`
         <div class="col-sm-6 col-md-4 col-lg-3">
-        <a href="images/img_1.jpg" class="image-popup gal-item"><img src="images/img_1.jpg" alt="Image" class="img-fluid"></a>
+        <a href="${bigURL}" class="image-popup gal-item"><img src="${
+          image.path
+        }" alt="Image" class="img-fluid"></a>
         </div>
         `);
       });
+      siteMagnificPopup();
     });
   });
 });
