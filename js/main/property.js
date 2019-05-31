@@ -42,7 +42,6 @@ $(document).ready(function() {
 
     startDate = new Date(house.start_date);
     endDate = new Date(house.end_date);
-
     $("#housesContainerSingle").append(`
     <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/hero_bg_2.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
       <div class="container">
@@ -129,14 +128,31 @@ $(document).ready(function() {
             <div class="bg-white widget border rounded">
    
               <h3 class="h4 text-black widget-title mb-3">Contact Owner</h3>
-              <form action="" class="form-contact-agent">
-                <div class="form-group">
-                  <input type="submit" id="phone" class="btn btn-primary" value="Request Your Stay">
-                </div>
+              <form id="contact-agent" action="" class="form-contact-agent">
+                <button id="contact-owner-btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Contact owner</button>
               </form>
             </div>
           </div>
           
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Interested? Get in touch</h5>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Contact the owner:</p>
+                <h4 class="modal-name"></h4>
+                <a class="modal-email" href=""></a>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>`);
@@ -184,5 +200,6 @@ $(document).ready(function() {
       });
       siteMagnificPopup();
     });
+
   });
 });
