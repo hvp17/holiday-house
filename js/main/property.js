@@ -2,7 +2,6 @@
 var url_string = window.location.href;
 var url = new URL(url_string);
 var c = url.searchParams.get("id");
-console.log(c);
 
 function isFamilyFriendly(house) {
   if (house.family_friendly == 1) {
@@ -22,9 +21,7 @@ function isSmokerFriendly(house) {
 
 $(document).ready(function() {
   $(".clickmeimage").on("click", function() {
-    console.log($(this));
     var theGoodStuff = $(this).find(".gal-item");
-    console.log(theGoodStuff);
     $.magnificPopup.open({
       items: {
         src: theGoodStuff
@@ -38,7 +35,7 @@ $(document).ready(function() {
     dataType: "JSON"
   }).always(function(jData) {
     let house = jData.house[0];
-    console.log(house);
+    house;
 
     startDate = new Date(house.start_date);
     endDate = new Date(house.end_date);
@@ -129,7 +126,7 @@ $(document).ready(function() {
    
               <h3 class="h4 text-black widget-title mb-3">Contact Owner</h3>
               <form id="contact-agent" action="" class="form-contact-agent">
-                <button id="contact-owner-btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Contact owner</button>
+                <button id="contact-owner-btn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Contact owner </button>
               </form>
             </div>
           </div>
@@ -145,8 +142,14 @@ $(document).ready(function() {
               </div>
               <div class="modal-body">
                 <p>Contact the owner:</p>
-                <h4 class="modal-name"></h4>
-                <a class="modal-email" href=""></a>
+                <h4 class="modal-name">${house.userName}</h4>
+                <a class="modal-email" href="mailto:${
+                  house.userEmail
+                }">${house.userEmail}</a>
+                <br>
+                <a class="modal-phone" href="tel:${
+                  house.userPhone
+                }">${house.userPhone}</a>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -200,6 +203,5 @@ $(document).ready(function() {
       });
       siteMagnificPopup();
     });
-
   });
 });

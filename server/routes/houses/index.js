@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const Promise = require("bluebird");
 const connection = require("../../connection");
@@ -13,7 +13,6 @@ router.get("/", (req, res) => {
       res.send({ status: 1, houses: rows });
     });
   } catch (error) {
-    console.log(error);
     res.send({ status: 0, message: error.message });
   }
 });
@@ -26,7 +25,7 @@ router.get("/filtered", (req, res) => {
       res.send({ status: 1, houses: rows });
     });
   } catch (error) {
-    console.log(error);
+    error;
     res.send({ status: 0, message: error.message });
   }
 });
@@ -44,7 +43,6 @@ router.get("/one/:id", (req, res) => {
       }
     );
   } catch (error) {
-    console.log(error);
     res.send({ status: 0, message: error.msg });
   }
 });
@@ -60,6 +58,8 @@ const upload = multer({ storage });
 
 router.post("/create", upload.array("images[]"), (req, res) => {
   try {
+    const user = jwt.decode(req.header("x-token"));
+    "IM HERE", user.id;
     const formValues = JSON.parse(req.body.form_values);
     const {
       txtTitle,
@@ -74,10 +74,9 @@ router.post("/create", upload.array("images[]"), (req, res) => {
       txtRooms,
       txtPrice
     } = formValues;
-    console.log(formValues);
     connection.beginTransaction(function(err) {
       if (err) {
-        throw err;
+        return res.send({ status: 0, message: err.message });
       }
       connection.query(
         "INSERT INTO `houses` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -89,7 +88,7 @@ router.post("/create", upload.array("images[]"), (req, res) => {
           txtHouseType ? txtHouseType : 1,
           txtStartDate,
           txtEndDate,
-          user_fk,
+          user.id,
           txtRooms,
           txtSmoker === "on" ? true : false,
           txtFamily === "on" ? true : false,
@@ -98,10 +97,9 @@ router.post("/create", upload.array("images[]"), (req, res) => {
         function(err, result) {
           if (err) {
             connection.rollback(function() {
-              throw err;
+              res.send({ status: 0, message: err.message });
             });
           }
-          console.log("x", result);
           let links = [];
 
           Promise.map(req.files, file =>
@@ -114,14 +112,13 @@ router.post("/create", upload.array("images[]"), (req, res) => {
               links = [...links, ...fullSizeLinks];
 
               links.forEach(link => {
-                console.log("inserting LINK: ", link);
                 connection.query(
                   "INSERT INTO `images` VALUES (?, ?, ?)",
                   [null, result.insertId, link],
                   function(err, result) {
                     if (err) {
                       connection.rollback(function() {
-                        throw err;
+                        res.send({ status: 0, message: err.message });
                       });
                     }
                   }
@@ -131,12 +128,12 @@ router.post("/create", upload.array("images[]"), (req, res) => {
               connection.commit(function(err) {
                 if (err) {
                   connection.rollback(function() {
-                    throw err;
+                    res.send({ status: 0, message: err.message });
                   });
                 }
-                console.log("Transaction Complete.");
+
                 res.send({
-                  stateus: 1,
+                  status: 1,
                   message: "Successfully created house!"
                 });
               });
@@ -147,8 +144,7 @@ router.post("/create", upload.array("images[]"), (req, res) => {
     });
     /* End transaction */
   } catch (error) {
-    console.log(error);
-    res.send(error);
+    return res.send({ status: 0, message: error.message });
   }
 });
 
@@ -161,7 +157,6 @@ router.get("/delete/:id", (req, res) => {
       res.send({ ok: true, data: rows });
     });
   } catch (error) {
-    console.log(error);
     res.send({ ok: false, msg: error.msg });
   }
 });

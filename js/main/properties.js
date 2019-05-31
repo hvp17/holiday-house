@@ -20,7 +20,6 @@ $(document).ready(function() {
     let dateValue = date.value;
     dateValue = dateValue.split("-");
     timeStamp = new Date(dateValue).getTime();
-    // console.log(timeStamp);
 
     let dateClassItems = document.querySelectorAll(".date-class");
     dateClassItems.forEach(dateClassItem => {
@@ -58,10 +57,8 @@ $(document).ready(function() {
     let typesSelectValue = typeSelect[typeSelect.selectedIndex].value;
     let typesClassItems = document.querySelectorAll(".type-class");
     typesClassItems.forEach(typesClassItem => {
-      console.log(typesClassItem);
       let dataValue = $(typesClassItem).data("type");
       let parent = $(typesClassItem).parent();
-      console.log(typesSelectValue, dataValue);
       if (Number(typesSelectValue) === dataValue) {
         $(parent).show();
       } else if (typesSelectValue === "All") {
@@ -96,6 +93,7 @@ $(document).ready(function() {
       }).always(function(jImagesData) {
         const { status, images } = jImagesData;
         const firstThumbnail = images.find(x => x.path.includes("thumbnail"));
+        images;
         $("#housesContainer").append(`   
         <div class="col-md-6 col-lg-4 mb-4 item" data-price="${
           house.price_per_night
@@ -109,9 +107,9 @@ $(document).ready(function() {
               <img src="${firstThumbnail.path}" alt="Image" class="img-fluid">
             </a>
             <div class="p-4 property-body">
-              <h2 class="property-title"><a href="property-details.html">${
-                house.title
-              }</a></h2>
+              <h2 class="property-title"><a href="property-details.php?id=${
+                house.id
+              }">${house.title}</a></h2>
               <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span>${
                 house.address
               }</span>
@@ -151,7 +149,6 @@ $(document).ready(function() {
       let value = smokerFriendlyElement.dataset.smoker;
       if (value == 0) {
         let parent = smokerFriendlyElement.closest(".item");
-        console.log(parent);
         $(parent).toggle();
       }
     });
@@ -165,7 +162,6 @@ $(document).ready(function() {
       let value = familyFriendlyElement.dataset.family;
       if (value == 0) {
         let parent = familyFriendlyElement.closest(".item");
-        console.log(parent);
         $(parent).toggle();
       }
     });

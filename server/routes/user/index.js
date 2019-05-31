@@ -12,7 +12,6 @@ router.get("/", (req, res) => {
       res.send(rows);
     });
   } catch (error) {
-    console.log(error);
     res.send(error);
   }
 });
@@ -20,7 +19,7 @@ router.get("/", (req, res) => {
 router.post("/register", (req, res) => {
   try {
     const { txtName, txtEmail, txtPhone, txtPassword } = req.body;
-    console.log("values: ", req.body);
+    "values: ", req.body;
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(txtPassword, salt);
     connection.execute(
@@ -37,13 +36,11 @@ router.post("/register", (req, res) => {
           process.env.SECRET
         );
 
-        console.log(token);
         res.send({ status: 1, token });
         if (err) throw err;
       }
     );
   } catch (error) {
-    console.log(error);
     res.send(error);
   }
 });
@@ -72,7 +69,6 @@ router.post("/login", (req, res) => {
       }
     );
   } catch (error) {
-    console.log(error);
     res.send(error);
   }
 });

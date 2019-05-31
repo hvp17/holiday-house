@@ -5,13 +5,11 @@ $(document).on("click", "#btnLogin", function() {
     method: "POST",
     dataType: "JSON"
   }).always(function(jData) {
-    console.log("jData ", jData);
     if (jData.status === 1) {
       window.localStorage.setItem("token", jData.token);
       window.location.href = "/index.php";
     } else {
       $("#msgError").text("Failed to login.");
-      console.log("error login");
     }
   });
 });

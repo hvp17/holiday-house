@@ -1,6 +1,12 @@
 // Insert house with images
 
 $(document).ready(function() {
+  $.ajaxSetup({
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader("x-token", window.localStorage.getItem("token"));
+    }
+  });
+
   $.ajax({
     url: "http://localhost:3000/filters/getTypes",
     dataType: "JSON"
@@ -22,9 +28,7 @@ $(document).on("click", 'a[href="#finish"]', function() {
   }
   var jsonData = JSON.stringify(obj);
 
-  console.log(jsonData);
   var file_data = $("#image")[0].files;
-  console.log("fileData: ", file_data.length, file_data);
   var form_data = new FormData($("#frmListHouse"));
 
   for (var i = 0; i < file_data.length; i++) {
@@ -37,6 +41,7 @@ $(document).on("click", 'a[href="#finish"]', function() {
     url: "http://localhost:3000/houses/create",
     method: "POST",
     data: form_data,
+
     processData: false,
     contentType: false,
     type: "POST",
@@ -44,9 +49,7 @@ $(document).on("click", 'a[href="#finish"]', function() {
       window.location.href = "/properties.php";
       alert("success", data);
     }
-  }).always(function(jData) {
-    console.log("jData ", jData);
-  });
+  }).always(function(jData) {});
 });
 
 $(function() {

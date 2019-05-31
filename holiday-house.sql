@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 28, 2019 at 02:09 PM
+-- Generation Time: May 31, 2019 at 01:43 PM
 -- Server version: 5.7.25
 -- PHP Version: 7.3.1
 
@@ -41,21 +41,6 @@ CREATE TABLE `houses` (
   `price_per_night` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `houses`
---
-
-INSERT INTO `houses` (`id`, `title`, `description`, `address`, `type_fk`, `start_date`, `end_date`, `user_fk`, `rooms`, `smoker_friendly`, `family_friendly`, `price_per_night`) VALUES
-(11, 'What a house', 'rthis is a description', 'Tulpiu 2-4 Panevezys, Lithuania', 1, '2019-05-08 22:00:00', '2019-05-30 22:00:00', 7, 4, 0, 1, 283823932),
-(15, 'SWEET', 'HOME ALABAMA', '213123123', 2, '2019-06-28 22:00:00', '2019-07-12 22:00:00', 7, 5, 1, 0, 2312),
-(16, 'Nice house', 'bla bla bla', 'Nice house', 2, '2019-04-30 22:00:00', '2019-05-31 22:00:00', 7, 5, 1, 0, 4593),
-(17, 'Nice house', 'bla bla bla', 'Nice house', 2, '2019-04-30 22:00:00', '2019-05-31 22:00:00', 7, 5, 1, 0, 4593),
-(18, 'Nice house', 'bla bla bla', 'Nice house', 2, '2019-04-30 22:00:00', '2019-05-31 22:00:00', 7, 5, 1, 0, 4593),
-(19, 'Nice house', 'bla bla bla', 'Nice house', 2, '2019-04-30 22:00:00', '2019-05-31 22:00:00', 7, 5, 1, 0, 4593),
-(20, 'Nice house', 'bla bla bla', 'Nice house', 2, '2019-04-30 22:00:00', '2019-05-31 22:00:00', 7, 5, 1, 0, 4593),
-(21, 'Nice house', 'bla bla bla', 'Nice house', 2, '2019-04-30 22:00:00', '2019-05-31 22:00:00', 7, 5, 1, 0, 4593),
-(22, 'Nice house', 'bla bla bla', 'Nice house', 2, '2019-04-30 22:00:00', '2019-05-31 22:00:00', 7, 5, 1, 0, 4593);
-
 -- --------------------------------------------------------
 
 --
@@ -67,40 +52,6 @@ CREATE TABLE `images` (
   `house_fk` bigint(20) UNSIGNED NOT NULL,
   `path` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `images`
---
-
-INSERT INTO `images` (`id`, `house_fk`, `path`) VALUES
-(12, 11, 'https://storage.googleapis.com/holiday-house/thumbnail_hero_bg_3.jpg'),
-(13, 11, 'https://storage.googleapis.com/holiday-house/thumbnail_hero_bg_4.jpg'),
-(14, 11, 'https://storage.googleapis.com/holiday-house/thumbnail_img_1.jpg'),
-(15, 11, 'https://storage.googleapis.com/holiday-house/thumbnail_img_2.jpg'),
-(16, 11, 'https://storage.googleapis.com/holiday-house/thumbnail_img_3.jpg'),
-(17, 11, 'https://storage.googleapis.com/holiday-house/hero_bg_3.jpg'),
-(18, 11, 'https://storage.googleapis.com/holiday-house/hero_bg_4.jpg'),
-(19, 11, 'https://storage.googleapis.com/holiday-house/img_1.jpg'),
-(20, 11, 'https://storage.googleapis.com/holiday-house/img_2.jpg'),
-(21, 11, 'https://storage.googleapis.com/holiday-house/img_3.jpg'),
-(22, 14, 'https://storage.googleapis.com/holiday-house/thumbnail_person_6.jpg'),
-(23, 14, 'https://storage.googleapis.com/holiday-house/person_6.jpg'),
-(24, 15, 'https://storage.googleapis.com/holiday-house/thumbnail_about.jpg'),
-(25, 15, 'https://storage.googleapis.com/holiday-house/about.jpg'),
-(26, 16, 'https://storage.googleapis.com/holiday-house/thumbnail_puppy.jpeg'),
-(27, 16, 'https://storage.googleapis.com/holiday-house/puppy.jpeg'),
-(28, 17, 'https://storage.googleapis.com/holiday-house/thumbnail_puppy.jpeg'),
-(29, 17, 'https://storage.googleapis.com/holiday-house/puppy.jpeg'),
-(30, 18, 'https://storage.googleapis.com/holiday-house/thumbnail_puppy.jpeg'),
-(31, 18, 'https://storage.googleapis.com/holiday-house/puppy.jpeg'),
-(32, 19, 'https://storage.googleapis.com/holiday-house/thumbnail_puppy.jpeg'),
-(33, 19, 'https://storage.googleapis.com/holiday-house/puppy.jpeg'),
-(34, 20, 'https://storage.googleapis.com/holiday-house/thumbnail_puppy.jpeg'),
-(35, 20, 'https://storage.googleapis.com/holiday-house/puppy.jpeg'),
-(36, 21, 'https://storage.googleapis.com/holiday-house/thumbnail_puppy.jpeg'),
-(37, 21, 'https://storage.googleapis.com/holiday-house/puppy.jpeg'),
-(38, 22, 'https://storage.googleapis.com/holiday-house/thumbnail_puppy.jpeg'),
-(39, 22, 'https://storage.googleapis.com/holiday-house/puppy.jpeg');
 
 -- --------------------------------------------------------
 
@@ -134,14 +85,6 @@ CREATE TABLE `users` (
   `phone` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `email`, `phone`, `password`) VALUES
-(7, 'TestingName1', 'TestingEmail1', '231234444', '$2b$10$rmLLAYsVaNJWNdxgPRX4G.ennXqmx0JiRWWZ6wjw2jiHAQHjhz0r2'),
-(9, 'Tomas', 'user@gmail.com', '11233423', '$2a$10$X.FXrUWclybIxmvEJBzFuuudXiXdBjS/K7IrDgz9Hx46zXNGh.vdG');
 
 --
 -- Indexes for dumped tables
@@ -186,13 +129,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `houses`
 --
 ALTER TABLE `houses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `types`
@@ -204,7 +147,7 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

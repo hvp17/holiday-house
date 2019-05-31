@@ -11,7 +11,6 @@ router.get("/getTypes", async (req, res) => {
       res.send({ status: 1, types: rows });
     });
   } catch (error) {
-    console.log(error);
     res.send(error);
   }
 });
