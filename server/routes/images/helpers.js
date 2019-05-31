@@ -22,7 +22,7 @@ var myBucket = storage.bucket(BUCKET_NAME);
 // });
 
 // get public url for file
-var getPublicUrlForItem = file_name => {
+const getPublicUrlForItem = file_name => {
   return `https://storage.googleapis.com/${BUCKET_NAME}/${file_name}`;
 };
 
@@ -34,17 +34,26 @@ const resizeAndUploadImage = (path, name) => {
     sharp(path)
       .resize({ width: 400 })
       .toFile(resizedImgPath)
-      .then(() => {
+      .then(meta => {
         uploadImage(resizedImgPath).then(newName => {
           unlinkAsync(resizedImgPath).then(() => {
-            return resolve(newName);
+            return resolve({ path: newName, meta });
           });
         });
       })
       .catch(err => reject(err));
   });
 };
-const uploadImage = (path, name) => {
+
+const getFile = async name => {
+  const response = await storage
+    .bucket(BUCKET_NAME)
+    .file(name)
+    .exists();
+  return response[0];
+};
+
+const uploadImage = path => {
   return new Promise((resolve, reject) => {
     storage
       .bucket(BUCKET_NAME)
@@ -70,7 +79,25 @@ const uploadImage = (path, name) => {
   });
 };
 
+const deleteImage = name => {
+  return new Promise((resolve, reject) => {
+    storage
+      .bucket(BUCKET_NAME)
+      .file(name)
+      .delete()
+      .then(response => {
+        // unlinkAsync(path).then(() => {
+        return resolve({ status: 1 });
+        // });
+      })
+      .catch(err => reject({ status: 0 }));
+  });
+};
+
 module.exports = {
+  getPublicUrlForItem,
+  deleteImage,
+  getFile,
   uploadImage,
   resizeAndUploadImage
 };

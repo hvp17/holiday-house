@@ -89,7 +89,7 @@ router.post("/create", upload.array("images[]"), (req, res) => {
           txtHouseType ? txtHouseType : 1,
           txtStartDate,
           txtEndDate,
-          user_fk ? user_fk : 7,
+          user_fk,
           txtRooms,
           txtSmoker === "on" ? true : false,
           txtFamily === "on" ? true : false,
@@ -107,7 +107,7 @@ router.post("/create", upload.array("images[]"), (req, res) => {
           Promise.map(req.files, file =>
             resizeAndUploadImage(file.path, file.filename)
           ).then(resizedLinks => {
-            links = [...links, ...resizedLinks];
+            links = [...links, ...resizedLinks.map(x => x.path)];
             Promise.map(req.files, file =>
               uploadImage(file.path, file.filename)
             ).then(fullSizeLinks => {
