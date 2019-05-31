@@ -36,7 +36,7 @@ router.get("/one/:id", (req, res) => {
     const { id } = req.params;
     if (!id) res.send({ ok: 0, message: "No ID is provided" });
     connection.execute(
-      "SELECT houses.*, users.email AS userEmail, users.phone as userPhone, users.name as userName FROM houses INNER JOIN users ON houses.user_fk = users.id WHERE houses.id = 11",
+      "SELECT houses.*, users.email AS userEmail, users.phone as userPhone, users.name as userName FROM houses INNER JOIN users ON houses.user_fk = users.id WHERE houses.id = ?",
       [id],
       (err, rows) => {
         if (err) throw err;
