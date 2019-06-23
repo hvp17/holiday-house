@@ -1,5 +1,4 @@
-// Insert house with images
-
+// Get token for session
 $(document).ready(function() {
   $.ajaxSetup({
     beforeSend: function(xhr) {
@@ -7,6 +6,7 @@ $(document).ready(function() {
     }
   });
 
+  // Display different types of houses
   $.ajax({
     url: "http://localhost:3000/filters/getTypes",
     dataType: "JSON"
@@ -20,9 +20,12 @@ $(document).ready(function() {
   });
 });
 
+// Insert house with images
 $(document).on("click", 'a[href="#finish"]', function() {
   var formData = $("#frmListHouse").serializeArray();
   var obj = {};
+
+  // Convert data to json object
   for (var a = 0; a < formData.length; a++) {
     obj[formData[a].name] = formData[a].value;
   }
@@ -34,13 +37,13 @@ $(document).on("click", 'a[href="#finish"]', function() {
     form_data.append("images[]", file_data[i]);
   }
 
+  // Add all data (previously specified) from the form to form_data
   form_data.append("form_values", jsonData);
 
   $.ajax({
     url: "http://localhost:3000/houses/create",
     method: "POST",
     data: form_data,
-
     processData: false,
     contentType: false,
     type: "POST",
@@ -51,6 +54,7 @@ $(document).on("click", 'a[href="#finish"]', function() {
   }).always(function(jData) {});
 });
 
+// Form interface interaction
 $(function() {
   $("#frmListHouse").steps({
     headerTag: "h2",
