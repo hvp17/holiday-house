@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 
 const connection = require("../../connection");
 
+// Get a list of all users
 router.get("/", (req, res) => {
   try {
     connection.query("SELECT * FROM users", (err, rows) => {
@@ -16,6 +17,7 @@ router.get("/", (req, res) => {
   }
 });
 
+// Perform user signup
 router.post("/register", (req, res) => {
   try {
     const { txtName, txtEmail, txtPhone, txtPassword } = req.body;
@@ -45,6 +47,7 @@ router.post("/register", (req, res) => {
   }
 });
 
+// Perform user login
 router.post("/login", (req, res) => {
   try {
     const { txtEmail, txtPassword } = req.body;

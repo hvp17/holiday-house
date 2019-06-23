@@ -6,6 +6,7 @@ const Promise = require("bluebird");
 const connection = require("../../connection");
 const { uploadImage, resizeAndUploadImage } = require("../images/helpers");
 
+// Get all houses
 router.get("/", (req, res) => {
   try {
     connection.query("SELECT * FROM houses", (err, rows) => {
@@ -30,6 +31,7 @@ router.get("/filtered", (req, res) => {
   }
 });
 
+// Get specific house by ID
 router.get("/one/:id", (req, res) => {
   try {
     const { id } = req.params;
@@ -47,6 +49,7 @@ router.get("/one/:id", (req, res) => {
   }
 });
 
+// Create a multer storage for images
 var storage = multer.diskStorage({
   destination: "./uploads",
   filename: function(req, file, cb) {
@@ -56,10 +59,10 @@ var storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+// Handle image upload from the web server
 router.post("/create", upload.array("images[]"), (req, res) => {
   try {
     const user = jwt.decode(req.header("x-token"));
-    "IM HERE", user.id;
     const formValues = JSON.parse(req.body.form_values);
     const {
       txtTitle,
@@ -148,6 +151,7 @@ router.post("/create", upload.array("images[]"), (req, res) => {
   }
 });
 
+// Delete house by the ID
 router.get("/delete/:id", (req, res) => {
   try {
     const { id } = req.params;

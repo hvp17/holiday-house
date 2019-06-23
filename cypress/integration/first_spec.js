@@ -65,7 +65,7 @@ describe("Listing a house", function() {
 
     cy.upload_file("../fixtures/puppy.jpeg", "image/jpeg", "[name='image[]']");
 
-    cy.get(".btnNext")
+    cy.get("a.btnNext")
       .eq(2)
       .click();
     cy.url().should("eq", "http://localhost:8888/properties.php");

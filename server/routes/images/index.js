@@ -7,6 +7,7 @@ const { Storage } = require("@google-cloud/storage");
 
 const connection = require("../../connection");
 
+// Get all images for a specific house listing
 router.get("/getHouseImages/:id", async (req, res) => {
   try {
     const { id } = req.params;

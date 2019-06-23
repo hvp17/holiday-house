@@ -17,6 +17,8 @@ const getPublicUrlForItem = file_name => {
 
 const sharp = require("sharp");
 
+// Resize image to thumbnail size and then upload it
+// to GCloud bucket
 const resizeAndUploadImage = (path, name) => {
   return new Promise((resolve, reject) => {
     const resizedImgPath = `./uploads/thumbnail_${name}`;
@@ -34,6 +36,7 @@ const resizeAndUploadImage = (path, name) => {
   });
 };
 
+// Receive a single file form GCloud bucket by name
 const getFile = async name => {
   const response = await storage
     .bucket(BUCKET_NAME)
@@ -42,6 +45,7 @@ const getFile = async name => {
   return response[0];
 };
 
+// Upload image to Gcloud by local path
 const uploadImage = path => {
   return new Promise((resolve, reject) => {
     storage
@@ -68,6 +72,7 @@ const uploadImage = path => {
   });
 };
 
+// Remove image from GCloud bucket by name
 const deleteImage = name => {
   return new Promise((resolve, reject) => {
     storage

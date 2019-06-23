@@ -9,9 +9,13 @@ const filtersRoutes = require("./routes/filters");
 const bodyParser = require("body-parser");
 const port = 3000;
 
+// ACCESS CONTROL
 app.use(cors());
+
+// Middleware for accepting form and JSON data
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Define routes
 app.use("/user", userRoutes);
 app.use("/images", imagesRoutes);
 app.use("/houses", housesRoutes);

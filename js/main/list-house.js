@@ -29,8 +29,7 @@ $(document).on("click", 'a[href="#finish"]', function() {
   var jsonData = JSON.stringify(obj);
 
   var file_data = $("#image")[0].files;
-  var form_data = new FormData($("#frmListHouse"));
-
+  var form_data = new FormData();
   for (var i = 0; i < file_data.length; i++) {
     form_data.append("images[]", file_data[i]);
   }
