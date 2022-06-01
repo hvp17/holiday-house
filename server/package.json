@@ -30,7 +30,7 @@
     "mysql2": "^1.6.5",
     "nodemon": "^1.19.0",
     "path": "^0.12.7",
-    "sharp": "^0.22.1"
+    "sharp": "^0.30.5"
   },
   "devDependencies": {
     "isomorphic-fetch": "^2.2.1",
